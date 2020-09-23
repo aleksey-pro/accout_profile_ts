@@ -1,0 +1,19 @@
+
+A
+public/index.html,f/4/f43ecdf8d666ee908aacce037b4cd72159e4741b
+P
+ src/components/Photos/Photos.tsx,f/f/ffc264d59f0618c9c129f0f023337e0848ef55b6
+>
+src/apiUrl.tsx,2/a/2a777fc9ced4fd6933ea72fba1d919ddebbeadd8
+G
+src/api/category-api.ts,0/8/08a4084f0181aa20641ee1f284ed44792ad23e0b
+H
+src/i18next/translate.ts,5/b/5b5740f215b415d64ed9d4b3480494761a3008b2
+T
+$src/components/CreateProductForm.tsx,5/8/58d39eb64f288d5777564f278ba5a9ad3cc10d30
+>
+src/api/api.ts,7/4/7416d243078528a1a4472aabfc6ddc6c3de82b0e
+X
+(src/components/Photos/Foreshortening.tsx,8/6/86f2d5f1dbd029b17246bf5ba9a8bdcd54fb8918
+O
+src/components/Photos/Photo.tsx,b/b/bb6259c859d44c17f009c2df8f6984df2f1782e0

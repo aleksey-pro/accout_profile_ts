@@ -1,0 +1,133 @@
+import * as React from 'react';
+import {SectionTitle} from "./Common/SectionTitle";
+import {MainFormFieldsType, ProductType, SuggestCategoryType} from "../types/types";
+import {MainForm} from "./MainForm";
+import {CategorizedForm} from "./CategorizedForm";
+import {Formik, Form} from 'formik';
+import {CategoryChooseContainer} from "./CategoryChoose/CategoryChooseContainer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../store";
+import * as Yup from 'yup';
+import {useTranslation} from "react-i18next";
+import "../i18next/translate";
+import {actions, saveProduct} from "../reducers/product";
+import FormikOnError from "./FormikOnError/FormikOnError";
+import {useEffect, useState} from "react";
+import {initData} from "../reducers/main-form-fields";
+import i18n from "../i18next/translate";
+import {Textarea} from "./Common/FormElements/Textarea";
+
+export const CreateProductForm: React.FC<ProductType> = (props) => {
+    const {t} = useTranslation();
+    const [wasLoaded, setWasLoaded] = useState(false);
+    const product: ProductType = useSelector((state: AppStateType) => state.product.productData);
+    const suggestCategory: SuggestCategoryType = useSelector((state: AppStateType) => state.product.suggestCategory);
+    const mainFormFields: MainFormFieldsType = useSelector((state: AppStateType) => state.mainForm.mainFormFields);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(initData(()=> {
+            setWasLoaded(true);
+        }));
+    }, [dispatch]);
+
+
+    const setSuggestCategory = () => {
+        dispatch(actions.setSelectedSuggestCategory(Object.keys(suggestCategory.list)));
+    }
+
+    const onSubmit = (values: any) => {
+        debugger;
+        if (values) {
+            const formData = new FormData();
+            for (let key in values) {
+                if (values.hasOwnProperty(key)) {
+                    if (key === 'photos') {
+                        let photos = values[key];
+                        for (let i in photos) {
+                            if (photos.hasOwnProperty(i)) {
+                                formData.append('photos[' + i + '][name]', photos[i].name);
+                                if (photos[i].rotation) {
+                                    formData.append('photos[' + i + '][rotation]', photos[i].rotation);
+                                }
+                            }
+                        }
+                    } else {
+                        formData.append(key, values[key]);
+                    }
+                }
+            }
+            dispatch(saveProduct(formData, (data: any) => {
+                if(data.success){
+                    document.location.href = data.success;
+                }
+            }));
+        }
+    }
+
+    if(!wasLoaded) {
+        return <div className={'container create'}>Загрузка...</div>;
+    }
+
+    return <Formik
+        initialValues={{}}
+        validationSchema={() => {
+            return Yup.object().shape({
+                title: Yup.string()
+                    .min(4, t("min", {min: 4}))
+                    .max(256, t("max", {max: 256}))
+                    .required(t('required')),
+                description: Yup.string()
+                    .min(10, t("min", {min: 10}))
+                    .max(256, t("max", {max: 256})),
+                /*brand: Yup.string()
+                    .when('add_brand', function (this: any, value:any){if(!value) return this.required(t('required'))}),*/
+                condition: Yup.string()
+                    .required(t('required')),
+                price_current: Yup.number()
+                    .typeError(t('number'))
+                    .max(999999, t("numberMax"))
+                    .required(t('required')),
+                price_origin: Yup.number()
+                    .typeError(t('number'))
+                    .when(
+                        ["price_current"],
+                        (price_current: number, schema: any) => {
+                            return !!price_current
+                                ? schema.moreThan(
+                                    price_current,
+                                    t("numberMin")
+                                )
+                                : schema;
+                        }
+                    ),
+
+                /*photos: Yup.array()
+                      .min(1, t("min",{ min: 1 }))
+                      .max(5, t("max",{ max: 5 }))
+                      .of(Yup.string().required())
+                      .required()*/
+            })
+        }}
+        onSubmit={onSubmit}
+    >
+        {({values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit}) => (
+            <Form className="form" onSubmit={handleSubmit}>
+                <FormikOnError>
+                    <MainForm product={product} mainFormFields={mainFormFields}/>
+                    <section className="container create">
+                        <SectionTitle counter={2} title={t('Select a category')}/>
+                        {(suggestCategory && Object.keys(suggestCategory).length) ?
+                        <div>Выбрать категорию <button type={"button"} onClick={setSuggestCategory}>{suggestCategory.title}</button></div> : ''}
+                        <div className="icon-block">
+                            <CategoryChooseContainer/>
+                        </div>
+                    </section>
+                    <CategorizedForm product={product}/>
+                </FormikOnError>
+            </Form>
+        )}
+    </Formik>
+}
+
+export default CreateProductForm;

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="referrer" content="unsafe-url">
+  <title>BabyBazaar create product page</title>
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="manifest" href="manifest.json" />
+  <script type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/base-reset.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/css/pages/create_product.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/css/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/css/croppie.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.min.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css"/>
+</head>
+
+<body class="create_product">
+<header class="header-create-desktop">
+  <div class="container">
+    <a href="#" class="logo">
+      <img src="assets/img/logo_new.svg" />
+    </a>
+    <div class="user-register">
+      <div class="info-nav">
+        <ul>
+          <li><a href="#">Продавцам</a></li>
+          <li><a href="#">О сервисе</a></li>
+        </ul>
+        <ul class="language">
+          <li><a href="#">Ua</a></li>
+          <li><a href="#">Ru</a></li>
+        </ul>
+      </div>
+      <ul class="user-menu">
+        <li class="header-menu">
+          <div class="profile-menu">
+            <!-- <img class="avatar" src="assets/img/user-register.svg" alt="">
+            <span class="name">Наталья П.</span> -->
+            <ul class="links">
+              <li><a href="#">Мои объявления</a></li>
+              <li><a href="#">Мой профиль</a></li>
+              <li><a href="#">История заказов</a></li>
+              <li><a href="#">Избранное</a></li>
+              <li><a href="#">Корзина</a></li>
+              <li><a href="#">Чат</a></li>
+              <li><a href="#">Настройка профиля</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="push-mobile">
+  <div class="container">
+    <img src="assets/img/chat-white.svg">
+    <p>У Вас 5 новых сообщений</p>
+    <a href="#" class="btn-light read-msg">Читать</a>
+  </div>
+</div>
+<header class="header-mobile">
+  <div class="support">
+    <div class="container">
+      <a target="_blank" href="http://babybazaar.com.ua/beta">Хотите помочь сделать проект лучше?</a>
+    </div>
+  </div>
+  <div class="top">
+    <div class="container">
+      <div class="hamburger hamburger--3dx">
+        <div class="hamburger-box">
+          <div class="hamburger-inner"></div>
+        </div>
+      </div>
+      <a href="#" class="logo">
+        <img src="assets/img/logo-mobile.png">
+      </a>
+      <div class="icon-group">
+        <a href="#" class="like"><img src="assets/img/heart.svg" alt=""><span class="sum empty">0</span></a>
+        <a href="#" class="cart"><img src="assets/img/cart.svg" alt=""><span class="sum">7</span></a>
+        <a href="#" class="add"><img src="assets/img/add.svg" alt=""></a>
+      </div>
+      <div class="user-register">
+        <a href="#" class="avatar"><img src="assets/img/user-register.svg" alt=""></a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="container">
+      <div class="search-group">
+        <input class="search" placeholder="Что вы ищите">
+        <button><img src="assets/img/search.svg" alt=""></button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="sidebar-mobile">
+  <div class="bar">
+    <div class="bar-header">
+      <div class="hamburger hamburger--3dx">
+        <div class="hamburger-box">
+          <div class="hamburger-inner"></div>
+        </div>
+      </div>
+      <a href="#" class="logo">
+        <img src="assets/img/logo-mobile.png">
+      </a>
+      <button class="search-btn">
+        <img src="assets/img/search.svg">
+      </button>
+      <ul class="language">
+        <li><a href="#">Ua</a></li>
+        <li><a href="#">Ru</a></li>
+      </ul>
+    </div>
+    <ul class="group top-links">
+      <li class="item user-account">
+        <a href="#" class="user-register">
+          <div class="avatar"><img src="assets/img/user-register.svg" alt=""></div>
+          <div class="name">Наталья П.</div>
+        </a>
+        <ul class="user-account-links">
+          <li><a href="#">Профиль</a></li>
+          <li><a href="#">Настройки</a></li>
+          <li><a href="#">Персналиация</a></li>
+          <li><a href="#">Счета</a></li>
+        </ul>
+      </li>
+      <li class="item">
+        <a href="#">
+          <div class="img-container">
+            <img src="assets/img/add2.svg">
+          </div>
+          Подать объявление
+        </a>
+      </li>
+    </ul>
+
+    <ul class="group ">
+      <li class="item collapse">
+        <div class="collapse-head category-heading">
+          Для малышей
+        </div>
+        <ul class="collapse-body">
+          <li class="collapse-item"><a href="#">Детские лыжи</a></li>
+          <li class="collapse-item"><a href="#">Рубашка для мальчика</a></li>
+          <li class="collapse-item"><a href="#">Футболка фирменая</a></li>
+        </ul>
+      </li>
+      <li class="item collapse">
+        <div class="collapse-head category-heading">
+          Для девочек
+        </div>
+        <ul class="collapse-body">
+          <li class="collapse-item"><a href="#">Детские лыжи</a></li>
+          <li class="collapse-item"><a href="#">Рубашка для мальчика</a></li>
+          <li class="collapse-item"><a href="#">Футболка фирменая</a></li>
+        </ul>
+      </li>
+      <li class="item collapse">
+        <div class="collapse-head category-heading">
+          Для мальчиков
+        </div>
+        <ul class="collapse-body">
+          <li class="collapse-item"><a href="#">Детские лыжи</a></li>
+          <li class="collapse-item"><a href="#">Рубашка для мальчика</a></li>
+          <li class="collapse-item"><a href="#">Футболка фирменая</a></li>
+        </ul>
+      </li>
+      <li class="item collapse">
+        <div class="collapse-head category-heading special">
+          Спецкатегория
+        </div>
+        <ul class="collapse-body">
+          <li class="collapse-item"><a href="#">Детские лыжи</a></li>
+          <li class="collapse-item"><a href="#">Рубашка для мальчика</a></li>
+          <li class="collapse-item"><a href="#">Футболка фирменая</a></li>
+        </ul>
+      </li>
+
+    </ul>
+
+    <ul class="group user-state">
+      <li class="item">
+        <a href="#">
+          <div class="icon-group">
+            <div class="wrap"><img src="assets/img/cart.svg" alt=""><span class="sum">7</span></div>
+          </div>
+          Корзина
+        </a>
+      </li>
+      <li class="item">
+        <a href="#">
+          <div class="icon-group">
+            <div class="wrap"><img src="assets/img/like.svg" alt=""><span class="sum">7</span></div>
+          </div>
+          Вишлист
+        </a>
+      </li>
+      <li class="item">
+        <a href="#">
+          <div class="icon-group">
+            <div class="wrap"><img src="assets/img/chat_black.svg" alt=""><span class="sum">7</span></div>
+          </div>
+          Чат
+        </a>
+      </li>
+    </ul>
+
+    <ul class="group bottom-links">
+      <li class="item">
+        <a href="#">
+          Как продавать на Baby Bazaar
+        </a>
+      </li>
+      <li class="item">
+        <a href="#">О сервисе</a>
+      </li>
+      <li class="item">
+        <a href="#">Страница</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="breadcrumbs">
+  <div class="container">
+    <ul class="list-breadcrumbs">
+      <li><a href="#">Baby Bazaar</a></li>
+      <li><a href="#">Breadcrumbs</a></li>
+      <li><a href="#">Current page</a></li>
+    </ul>
+  </div>
+</div>
+<script type="application/javascript">
+
+</script>
+<div id="root"></div>
+
+<footer class="footer">
+  <div class="footer-nav">
+    <div class="container">
+      <div class="contact-info">
+        <a href="#" class="logo"><img src="assets/img/logo_new.svg" alt="logo"/></a>
+        <div>
+          <a href="tel:+1234567890">+123-456-78-90</a>
+          <a href="mailto:info@babybazaar.com.ua">info@babybazaar.com.ua</a>
+        </div>
+      </div>
+      <div class="nav">
+        <ul>
+          <li><a class="category-heading" href="#">О нас</a></li>
+          <li><a class="category-heading" href="#">Покупателям</a></li>
+          <li><a class="category-heading" href="#">Продавцам</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">Политика конфиденциальности</a></li>
+          <li><a href="#">Публичное предложение</a></li>
+          <li><a href="#">Сбор данных</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="copyright-social">
+    <div class="container">
+      <div class="social">
+        <a href="#"><img src="assets/img/facebook_footer.svg" alt="fb"/></a>
+        <a href="#"><img src="assets/img/instagram_footer.svg" alt="inta"/></a>
+      </div>
+      <div class="copyright-language">
+        <ul class="language">
+          <li><a href="#">Ua</a></li>
+          <li><a href="#">Ru</a></li>
+        </ul>
+        © BabyBazaar.com.ua, 2019
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
