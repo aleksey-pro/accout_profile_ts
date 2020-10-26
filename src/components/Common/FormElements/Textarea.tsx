@@ -3,26 +3,36 @@ import {FormElementType} from '../../../types/types';
 import {useField} from "formik";
 
 type PropsType = {
-    settings: FormElementType
-    value: string | undefined
+    title: string
+    id: string
+    name: string
+    placeholder?: string | undefined
+    description?: string | undefined
+    message?: string | undefined
+    required?: boolean | undefined
+    disabled?: boolean | undefined
+    onChange?: (e:React.ChangeEvent<any>) => void
 };
 
 export const Textarea = (props: PropsType) => {
-    let {settings, ...otherProps} = props;
-    const attrs = settings.attributes;
-    const title = settings.title;
+    const title = props.title;
+    const id = props.id;
+    const name = props.name;
+    const placeholder = props.placeholder;
 
     const [
         field,
         { error, touched },
     ] = useField({
-        name: attrs.name,
+        name: name,
     });
 
-    return <div className="input-label">
-        <label htmlFor={attrs.name} className={attrs.required ? 'required' : ''}>{title}</label>
-        <textarea id={attrs.name} placeholder={attrs.placeholder} {...field} {...otherProps}/>
-        {error && touched && <div className="error">{error}</div>}
+    const onChange = (props.onChange)?props.onChange:()=>{};
 
+    return <div className={"input-label " + name}>
+        <label htmlFor={id}>{title}</label>
+        <textarea id={id} required={true} placeholder={placeholder}
+                  onChange={(e:React.ChangeEvent<any>) => {onChange(e); field.onChange(e);}} />
+        {error && touched &&  <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
 };

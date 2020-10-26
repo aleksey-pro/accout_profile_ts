@@ -23,7 +23,8 @@ export type PhotoAspectsType = {
     title: string
 }
 export type SuggestCategoryType = {
-    list: string[]
+    id?: string
+    parent?: string
     slug: string
     title: string
 }
@@ -62,22 +63,14 @@ export type MainFormFieldsType = {
     composition: FormElementType
     terms_of_payment: FormElementType
 }
-export type CategorizedFormFieldsType = {
-    brand: FormElementType
-    add_brand?: FormElementType
-    condition: FormElementType
-    price_current: FormElementType
-    price_origin: FormElementType
-    is_bargain: FormElementType
-    is_barter: FormElementType
-    is_gift: FormElementType
-    phone: FormElementType
-    show_phone: FormElementType
-    color: FormElementType
-    year: FormElementType
-    height: FormElementType
-    size: FormElementType
-    photos: FormElementType[]
+
+export type CategoryParamsOptionsType = {
+    brands: any
+    conditions: any
+    colors: any
+    years: any
+    heights: any
+    sizes: any
     filters: any
 }
 

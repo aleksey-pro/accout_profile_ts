@@ -1,36 +1,49 @@
 import * as React from 'react';
-import {FormElementType} from '../../../types/types';
+import {FormElementType, SelectOptionsType} from '../../../types/types';
 import {useField} from "formik";
 
 type PropsType = {
-    settings: FormElementType
-    value: string | undefined
+    title: string
+    id: string
+    name: string
+    options: any
+    placeholder?: string | undefined
+    description?: string | undefined
+    message?: string | undefined
+    required?: boolean | undefined
     disabled?: boolean | undefined
+    onChange?: (e:React.ChangeEvent<any>) => void
 };
 
 export const Select = (props: PropsType) => {
-    let {settings, ...otherProps} = props;
-    const attrs = settings.attributes;
-    const title = settings.title;
+    const title = props.title;
+    const id = props.id;
+    const name = props.name;
+    const placeholder = props.placeholder;
+    const options = props.options;
 
     const [
         field,
         { error, touched },
     ] = useField({
-        name: attrs.name,
+        name: name,
     });
 
-    const items = (settings.selectOptions) ? settings.selectOptions.map((data: any, i: number) =>
-        <option key={field.name + '_' + i.toString()} value={data.value}>{data.label}</option>) : '';
+    const items = (options) ? options.map((data: any, i: number) =>
+        <option key={name + '_' + i.toString()} value={data.id}>{data.label}</option>) : '';
 
-    return <div className="input-label">
-        <label htmlFor={attrs.name} className={attrs.required ? 'required' : ''}>{title}</label>
-        <select disabled={props.disabled} id={attrs.name} placeholder={attrs.placeholder} {...field} {...otherProps}>
-            <option value="">
-                {attrs.placeholder}
-            </option>
-            {items}
-        </select>
-        {error && touched && <div className="error">{error}</div>}
-    </div>
+    if(options.length) {
+        return <div className={"input-label select_margin-top"}>
+            <select disabled={props.disabled} id={name} placeholder={placeholder} {...field}>
+                <option value="">
+                    {placeholder}
+                </option>
+                {items}
+            </select>
+            <label htmlFor={name} className={props.required ? 'required' : ''}>{title}</label>
+            {error && touched && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
+        </div>
+    } else {
+        return <></>
+    }
 };

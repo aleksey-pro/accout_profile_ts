@@ -3,17 +3,15 @@ import {BaseThunkType} from "../store";
 import {productFormApi} from "../api/product-form-api";
 
 let initial_categories = [{}];
-let initial_mainFormFields = {};
 let initialState = {
     categories: initial_categories as CategoryType[] | undefined,
-    mainFormFields: initial_mainFormFields as MainFormFieldsType,
     locale: 'ua' as string,
 };
 
 export const mainFormReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case 'BB/INIT': {
-            return {...state, categories: action.data.categories, mainFormFields: action.data.form.settings, locale: action.data.locale}
+            return {...state, categories: action.data.categories, locale: action.data.locale}
         }
         default:
             return state;

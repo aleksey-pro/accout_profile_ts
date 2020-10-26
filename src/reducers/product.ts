@@ -5,7 +5,7 @@ import {photoApi} from "../api/photo-api";
 
 let initialState = {
     productData: {is_gift:'true'} as ProductType,
-    suggestCategory: {} as SuggestCategoryType,
+    suggestCategory: [] as SuggestCategoryType[],
     selectedSuggestCategory: [] as string[]
 };
 

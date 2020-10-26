@@ -1,18 +1,18 @@
 import {productFormApi} from "../api/product-form-api";
-import {InferActionsTypes, CategorizedFormFieldsType} from "../types/types";
+import {InferActionsTypes, CategoryParamsOptionsType} from "../types/types";
 import {BaseThunkType} from "../store";
 
 let initialState = {
-    categorizedFormFields: null as CategorizedFormFieldsType | null
+    categoryParamOptions: null as CategoryParamsOptionsType | null
 };
 
 export const categorizedFormReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case 'BB/SET_CATEGORIZED_FORM_FIELDS': {
-            return {...state, categorizedFormFields: action.data.settings}
+            return {...state, categoryParamOptions: action.data}
         }
         case 'BB/CLEAN_CATEGORIZED_FORM_FIELDS': {
-            return {...state, categorizedFormFields: null}
+            return {...state, categoryParamOptions: null}
         }
         default:
             return state;

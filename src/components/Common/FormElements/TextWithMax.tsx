@@ -1,27 +1,30 @@
 import * as React from 'react';
-import {FormElementType} from '../../../types/types';
 import {useField} from "formik";
+import ReactInputMask from "react-input-mask";
 
 type PropsType = {
     title: string
     id: string
     name: string
+    mask: string
+    maskChar: string | null
     placeholder?: string | undefined
     description?: string | undefined
     message?: string | undefined
     required?: boolean | undefined
     disabled?: boolean | undefined
-    onClick?: ((event: any) => void) | undefined
 };
 
-export const Checkbox = (props: PropsType) => {
+export const TextWithMax = (props: PropsType) => {
     const title = props.title;
     const id = props.id;
     const name = props.name;
+    const mask = props.mask;
+    const maskChar = props.maskChar;
     const placeholder = props.placeholder;
+    const description = props.description;
     const required = props.required;
     const disabled = props.disabled;
-    const onClick = props.onClick;
 
     const [
         field,
@@ -30,9 +33,9 @@ export const Checkbox = (props: PropsType) => {
         name: name,
     });
 
-    return <div className={"checkbox " + name}>
-        <input disabled={disabled} type="checkbox" id={id} required={required} placeholder={placeholder} onClick={onClick} {...field}/>
-        {title && <label htmlFor={id}>{title}</label>}
+    return <div className="input-label">
+        <label htmlFor={id}>{title}</label>
+        <ReactInputMask type="text" mask={mask} maskChar={maskChar} disabled={disabled} id={id} required={required} placeholder={placeholder} {...field} />
         {error && touched && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
 };
