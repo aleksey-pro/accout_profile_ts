@@ -998,9 +998,13 @@ body {
         }
     }
     .input-wrap {
-        margin-right: 15px;
+        margin-right: 12px;
         display: flex;
         flex-direction: column-reverse;
+
+        &.hidden {
+            display: none;
+        }
         &:nth-last-child(1) {margin-right: 0}
         @media screen and (max-width: 1140px) {
             margin-top: 20px;
@@ -1061,7 +1065,36 @@ body {
         border: 1px solid #EAEAF7;
         box-sizing: border-box;
         border-radius: 5px;
-        .preview {display: none}
+        .preview {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            left: 0;
+            height: 100%;
+            img {
+                width: 100%;                
+
+                &.rotate-0 {
+                    transform: rotate(0);
+                    margin-left: 0;                  
+                }
+                &.rotate-90 {
+                    transform: rotate(90deg);
+                    width: 280px;
+                    height: 199px;
+                    margin-left: -40px;
+                }
+                &.rotate-180 {
+                    transform: rotate(180deg);
+                }
+                &.rotate-270 {
+                    transform: rotate(270deg);
+                    width: 280px;
+                    height: 199px;
+                    margin-left: -40px;
+                }
+            }
+        }
         input[type='file'] {
             position: absolute;
             top: 0;
