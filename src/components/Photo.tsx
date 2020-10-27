@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import {useTranslation} from "react-i18next";
 import deleteIcon from "../assets/img/del.svg";
 import rotateIcon from "../assets/img/rotate.svg";
@@ -10,12 +9,7 @@ type PropsType = {
 
 export const Photo: React.FC<PropsType> = (props) => {
     const { t } = useTranslation();
-    const [preview, setPreview] = useState();
-    const onChangeHandler = (e:React.ChangeEvent) => {
-        //@ts-ignore
-        const file = e.target.files[0];
-        setPreview(file);
-    }
+
     return (
         <div className="create_product__category">
             <div className="category_number">
@@ -36,10 +30,10 @@ export const Photo: React.FC<PropsType> = (props) => {
                         </button>
                     </div>
                     <div className="input">
-                        <input type="file" multiple={true} name="photo" onChange={onChangeHandler}/>
+                        <input type="file" multiple={true}/>
                         <img src="" alt="" className="preview"/>
                         <label className="text">
-                            <img src={preview || uploadIcon} alt=""/>
+                            <img src={uploadIcon} alt=""/>
                             <span>{t('Click to download')}</span>
                         </label>
                     </div>
