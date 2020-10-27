@@ -21,14 +21,12 @@ let initialState = {
 
 export type InitialStateType = typeof initialState
 
-// @ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
 
-// @ts-ignore
-window.__store__ = store
+(window as any).__store__ = store
 
 export default store

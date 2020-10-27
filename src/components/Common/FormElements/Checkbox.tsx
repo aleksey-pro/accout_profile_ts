@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FormElementType} from '../../../types/types';
-import {useField} from "formik";
+import {useField, Field} from "formik";
 
 type PropsType = {
     title: string
@@ -31,7 +31,7 @@ export const Checkbox = (props: PropsType) => {
     });
 
     return <div className={"checkbox " + name}>
-        <input disabled={disabled} type="checkbox" id={id} required={required} placeholder={placeholder} onClick={onClick} {...field}/>
+        <Field disabled={disabled} type="checkbox" id={id} name={name} required={required} placeholder={placeholder} onClick={onClick} />
         {title && <label htmlFor={id}>{title}</label>}
         {error && touched && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
