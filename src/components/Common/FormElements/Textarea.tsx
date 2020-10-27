@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FormElementType} from '../../../types/types';
-import {useField} from "formik";
+import {Field, useField} from "formik";
 
 type PropsType = {
     title: string
@@ -19,6 +19,7 @@ export const Textarea = (props: PropsType) => {
     const id = props.id;
     const name = props.name;
     const placeholder = props.placeholder;
+    const disabled = props.disabled;
 
     const [
         field,
@@ -31,8 +32,8 @@ export const Textarea = (props: PropsType) => {
 
     return <div className={"input-label " + name}>
         <label htmlFor={id}>{title}</label>
-        <textarea id={id} required={true} placeholder={placeholder}
-                  onChange={(e:React.ChangeEvent<any>) => {onChange(e); field.onChange(e);}} />
+        <Field as="textarea" id={id} required={true} placeholder={placeholder} name={name}
+                  onChange={(e:React.ChangeEvent<any>) => {onChange(e); field.onChange(e);}} disabled={disabled}/>
         {error && touched &&  <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
 };
