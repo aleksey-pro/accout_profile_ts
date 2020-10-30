@@ -39,7 +39,7 @@ export const Price: React.FC<PropsType> = (props) => {
             <div className="price_items">
                 <Text
                     title={t('Enter the price of the product *')}
-                    id={'price'} name={'price'} 
+                    id={'price'} name={'price_current'} 
                     placeholder={'0 грн'} 
                     placeholderIn={false} 
                     required={true}
@@ -47,7 +47,7 @@ export const Price: React.FC<PropsType> = (props) => {
                 <Text
                     title={t('How much did you buy the product for?')}
                     id={'bought_price'}
-                    name={'bought_price'}
+                    name={'price_origin'}
                     placeholder={'0 грн'}
                     placeholderIn={false} 
                     required={true} 
@@ -56,9 +56,9 @@ export const Price: React.FC<PropsType> = (props) => {
             <Textarea title={t('Additional condition of sale')} id={'additional_condition'} name={'additional_condition'}
                       required={true} placeholder={t('For example, I will send only after subscription')} disabled={priceFree} />
             <div className="checkbox_items">
-                <Checkbox title={t('Bargaining is possible')} id={'bargain'} name={'bargain'} disabled={priceFree}/>
-                <Checkbox title={t('Barter is possible')} id={'barter'} name={'barter'} disabled={priceFree}/>
-                <Checkbox title={t('I will give for free')} id={'free'} name={'free'} onClick={freePrice} />
+                <Checkbox title={t('Bargaining is possible')} id={'bargain'} name={'is_bargain'} disabled={priceFree}/>
+                <Checkbox title={t('Barter is possible')} id={'barter'} name={'is_barter'} disabled={priceFree}/>
+                <Checkbox title={t('I will give for free')} id={'free'} name={'id_gift'} onClick={freePrice} />
             </div>
             <div className="category_steps">
                 <div className="wrap__category_back">

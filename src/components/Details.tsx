@@ -31,7 +31,7 @@ export const Details: React.FC<PropsType> = (props) => {
         const filters = fields.filters.map((filter: any, i: number) => {
             if (filter.name) {
                 return <Select key={i} title={filter.name} placeholder={'Почніть вводити'}
-                               id={filter.slug} name={filter.slug} options={filter.options} />
+                               id={filter.slug} name={`filters[${filter.slug}]`} options={filter.options} />
             }
         });
         return <>

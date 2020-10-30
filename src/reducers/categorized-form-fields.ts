@@ -27,7 +27,7 @@ export const actions = {
 export const getCategorizedFormBySlug = (slug: string, afterResponseAction: (token?: string) => void):ThunkType => async (dispatch) =>  {
     const data = await productFormApi.getData(slug);
     if (data.errors === undefined) {
-        dispatch(actions.setCategorizedFormFields(data));
+        dispatch(actions.setCategorizedFormFields({ ...data, slug }));
         let token = '';
         if(data.values && data.values._token){
             token = data.values._token;
