@@ -28,9 +28,9 @@ export const Details: React.FC<PropsType> = (props) => {
     }
 
     if (fields) {
-        const filters = fields.filters.map((filter: any) => {
+        const filters = fields.filters.map((filter: any, i: number) => {
             if (filter.name) {
-                return <Select title={filter.name} placeholder={'Почніть вводити'}
+                return <Select key={i} title={filter.name} placeholder={'Почніть вводити'}
                                id={filter.slug} name={filter.slug} options={filter.options} />
             }
         });
