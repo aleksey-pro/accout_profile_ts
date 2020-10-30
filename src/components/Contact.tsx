@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {useTranslation} from "react-i18next";
+import { Field } from 'formik';
 import deleteIcon from "../assets/img/del.svg";
 import rotateIcon from "../assets/img/rotate.svg";
 import uploadIcon from "../assets/img/upload_icon_1.svg";
@@ -24,7 +25,7 @@ export const Contact: React.FC<PropsType> = (props) => {
                 </div>
                 <TextWithMax title={'Вкажіть ціну товару *'} name={'phone'} id={'phone'} mask={'+38 9 99 99 99 999'} maskChar={' '} />
                 <div className="checkbox">
-                    <input type="checkbox" id="telephone"/>
+                    <Field type="checkbox" id="telephone" name="show_phone"/>
                     <label htmlFor="telephone">Показувати телефон в оголошенні</label>
                 </div>
             </div>

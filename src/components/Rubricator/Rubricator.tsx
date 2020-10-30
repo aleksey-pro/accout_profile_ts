@@ -1,6 +1,7 @@
 import * as React from 'react';
 import 'react-block-ui/style.css';
 import {useDispatch, useSelector} from "react-redux";
+import { Field } from "formik";
 import {AppStateType} from "../../store";
 import {useCallback, useState} from "react";
 import BlockUi from "react-block-ui";
@@ -41,7 +42,7 @@ export const Rubricator: React.FC<PropsType> = () => {
 
             if (list) {
                 setIsMain(false);
-                if (list == categories) {
+                if (list === categories) {
                     setIsMain(true);
                 }
                 selectedCategoryList.push({'slug': slug, 'title': list.title});

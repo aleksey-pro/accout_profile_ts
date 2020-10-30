@@ -72,6 +72,7 @@ export type CategoryParamsOptionsType = {
     heights: any
     sizes: any
     filters: any
+    slug: string,
 }
 
 export type CategoryType = {
