@@ -551,7 +551,7 @@ body {
                 flex-direction: column;
             }
             .input-label {
-                max-width: 195px;
+                flex-basis: 50%;
                 margin-top: 30px;
                 input {
                     width: 100%;
@@ -559,6 +559,24 @@ body {
                 &:first-child {
                     margin-right: 30px;
                 }
+            }
+
+            .input-flex {
+                display: flex;
+                align-items: center;
+                margin-top: 20px;
+
+                input {
+                    margin-top: 0;
+                    width: 80%;
+                }
+            }
+
+            .input-cur {
+                padding: 5px;
+                font-size: 12px;
+                line-height: 12px;
+                color: #222222;
             }
         }
         .inputs-block {
