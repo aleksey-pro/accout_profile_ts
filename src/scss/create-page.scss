@@ -406,6 +406,10 @@ body {
         @include number;
         @include category_title;
 
+        .msg_err__container {
+            margin-top: 20px;
+        }
+
         .category_number {
             display: flex;
             align-items: center;
@@ -1034,7 +1038,7 @@ body {
                 border-radius: 5px;
                 cursor: pointer;
                 transition: color .15s, background .15s linear;
-                &:hover {
+                &[disabled="false"]:hover {
                     background: #FFFFFF;
                     box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
                 }
@@ -1047,7 +1051,7 @@ body {
                 background: #6354F4;
                 color: #FFFFFF;
                 transition: color .15s, background .15s linear;
-                &:hover {
+                &[disabled="false"]:hover {
                     background: #FFFFFF;
                     color: #6354F4;
                     box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
@@ -1068,9 +1072,8 @@ body {
         .preview {
             display: flex;
             align-items: center;
-            position: absolute;
-            left: 0;
             height: 100%;
+            overflow: hidden;
             img {
                 width: 100%;                
 
@@ -1079,19 +1082,13 @@ body {
                     margin-left: 0;                  
                 }
                 &.rotate-90 {
-                    transform: rotate(90deg);
-                    width: 280px;
-                    height: 199px;
-                    margin-left: -40px;
+                    transform: rotate(90deg) scale(1.4);
                 }
                 &.rotate-180 {
                     transform: rotate(180deg);
                 }
                 &.rotate-270 {
-                    transform: rotate(270deg);
-                    width: 280px;
-                    height: 199px;
-                    margin-left: -40px;
+                    transform: rotate(270deg) scale(1.4);
                 }
             }
         }
@@ -1173,5 +1170,10 @@ body {
                 margin-top: 30px;
             }
         }
+    }
+
+    .msg_err {
+        color: red;
+        margin-left: 4px;
     }
 }

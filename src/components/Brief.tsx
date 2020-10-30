@@ -46,9 +46,14 @@ export const Brief: React.FC<PropsType> = (props) => {
     const message= isSearching ? t('Search...') : defaultMessage;
     return <>
         <div className="category_title">{t('Enter product name *')}</div>
-        <Name id={'name'} name={'name'} placeholder={t('For example, a green polka dot H&M dress')}
-              title={t('The name will appear at the top of your product page')}
-              onChange={(e: any) => setSearchTerm(e.target.value)} focusedNameFieldClick={callback}/>
+        <Name
+            id={'title'} 
+            name={'title'}
+            required={true}
+            placeholder={t('For example, a green polka dot H&M dress')}
+            title={t('The name will appear at the top of your product page')}
+            onChange={(e: any) => setSearchTerm(e.target.value)}
+            focusedNameFieldClick={callback}/>
         {message && <span className="max-length">{message}</span>}
         <div className="category_title">{t('Write a short description of the product *')}</div>
         <Textarea id={'description'} name={'description'}

@@ -8,7 +8,7 @@ import {useTranslation} from "react-i18next";
 import "../i18next/translate";
 import {saveProduct} from "../reducers/product";
 import FormikOnError from "./FormikOnError/FormikOnError";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {initData} from "../reducers/main-form-fields";
 import {Rubricator} from "./Rubricator/Rubricator";
 import {Details} from "./Details";
@@ -20,36 +20,48 @@ import {Photo} from "./Photo";
 import {Contact} from "./Contact";
 
 export const CreateProductForm: React.FC<ProductType> = (props) => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const [wasLoaded, setWasLoaded] = useState(false);
 
     const product: ProductType = useSelector((state: AppStateType) => state.product.productData);
     const categoryParamOptions: CategoryParamsOptionsType = useSelector((state: AppStateType) => state.categorizedForm.categoryParamOptions);
-
+    const previewsFromStorage: Array<{ name: string, rotate: number }> = useSelector((state: any) => state.product.previews);
+    
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         dispatch(initData(()=> {
             setWasLoaded(true);
         }));
     }, [dispatch]);
-
-
+    
+    
     const onSubmit = (values: any) => {
         if (values) {
             const formData = new FormData();
             for (let key in values) {
                 if (values.hasOwnProperty(key)) {
                     if (key === 'photos') {
-                        let photos = values[key];
-                        for (let i in photos) {
-                            if (photos.hasOwnProperty(i)) {
-                                formData.append('photos[' + i + '][name]', photos[i].name);
-                                if (photos[i].rotation) {
-                                    formData.append('photos[' + i + '][rotation]', photos[i].rotation);
-                                }
+                        let photos: Array<{name: string, original: string}> = values[key];
+                        const resultPhotos: Array<{name: string; rotate: number}> = [];
+                        photos.forEach((photo: {name: string, original: string}) => {
+                            const idx = previewsFromStorage.findIndex((p) => p.name === photo.original);
+                            if (idx >= 0) {
+                                resultPhotos.push({
+                                    name: photo.name,
+                                    rotate: previewsFromStorage[idx].rotate,
+                                })
                             }
+                        });
+                        console.log('resultPhotos', resultPhotos);
+                        if (resultPhotos.length) {
+                            resultPhotos.forEach((photo: {name: string; rotate: number}, i: number) => {
+                            console.log("onSubmit -> photo", photo)
+                                formData.append('photos[' + i + '][name]', photo.name);
+                                formData.append('photos[' + i + '][rotation]', `${photo.rotate}`);                      
+                            });
                         }
+
                     } else {
                         formData.append(key, values[key]);
                     }
@@ -69,44 +81,43 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
 
     return <Formik
         initialValues={{}}
-        validationSchema={() => {
-            return Yup.object().shape({
-                title: Yup.string()
-                    .min(4, t("min", {min: 4}))
-                    .max(256, t("max", {max: 256}))
-                    .required(t('required')),
-                description: Yup.string()
-                    .min(10, t("min", {min: 10}))
-                    .max(256, t("max", {max: 255})),
-                /*brand: Yup.string()
-                    .when('add_brand', function (this: any, value:any){if(!value) return this.required(t('required'))}),*/
-                condition: Yup.string()
-                    .required(t('required')),
-                price_current: Yup.number()
-                    .typeError(t('number'))
-                    .max(999999, t("numberMax"))
-                    .required(t('required')),
-                price_origin: Yup.number()
-                    .typeError(t('number'))
-                    .when(
-                        ["price_current"],
-                        (price_current: number, schema: any) => {
-                            return !!price_current
-                                ? schema.moreThan(
-                                    price_current,
-                                    t("numberMin")
-                                )
-                                : schema;
-                        }
-                    ),
+        // validationSchema={() => {
+        //     return Yup.object().shape({
+        //         title: Yup.string()
+        //             .min(4, t("min", {min: 4}))
+        //             .max(256, t("max", {max: 256})),
+        //         description: Yup.string()
+        //             .min(10, t("min", {min: 10}))
+        //             .max(256, t("max", {max: 255})),
+        //         /*brand: Yup.string()
+        //             .when('add_brand', function (this: any, value:any){if(!value) return this.required(t('required'))}),*/
+        //         condition: Yup.string()
+        //             .required(t('required')),
+        //         price_current: Yup.number()
+        //             .typeError(t('number'))
+        //             .max(999999, t("numberMax"))
+        //             .required(t('required')),
+        //         price_origin: Yup.number()
+        //             .typeError(t('number'))
+        //             .when(
+        //                 ["price_current"],
+        //                 (price_current: number, schema: any) => {
+        //                     return !!price_current
+        //                         ? schema.moreThan(
+        //                             price_current,
+        //                             t("numberMin")
+        //                         )
+        //                         : schema;
+        //                 }
+        //             ),
 
-                /*photos: Yup.array()
-                      .min(1, t("min",{ min: 1 }))
-                      .max(5, t("max",{ max: 5 }))
-                      .of(Yup.string().required())
-                      .required()*/
-            })
-        }}
+        //         /*photos: Yup.array()
+        //               .min(1, t("min",{ min: 1 }))
+        //               .max(5, t("max",{ max: 5 }))
+        //               .of(Yup.string().required())
+        //               .required()*/
+        //     })
+        // }}
         onSubmit={onSubmit}
     >
         {({values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit}) => (
@@ -143,7 +154,7 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
                             <Photo/>
                             <Contact/>
                             <div className="btn_block">
-                                <button type="button" className="btn-dark">{t('Create an ad')}</button>
+                                <button type="submit" className="btn-dark">{t('Create an ad')}</button>
                                 <button type="button" className="btn-light">{t('Save the draft')}</button>
                             </div>
                         </>

@@ -93,5 +93,12 @@ export type SelectedCategoryType = {
     slug: string
 }
 
+export type preveiwImageType = {
+    preview: ArrayBuffer | string | null,
+    fileName: string,
+    rotate: number,
+    id: string,
+}
+
 
 export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
