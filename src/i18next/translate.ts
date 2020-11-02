@@ -154,6 +154,9 @@ const resources = {
             'Bargaining is possible': 'Возможен торг',
             'Barter is possible': 'Возможен бартер',
             'I will give for free': 'Отдам даром',
+            'Add a photo *': 'Добавьте фото *',
+            'You can add a minimum of 1 image and a maximum of 5.': 'Вы можете добавить минимум 1 изображение, максимум - 5.',
+            'Click to download': 'Нажмите, чтобы загрузить',
         }
     }
 };
