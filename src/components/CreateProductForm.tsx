@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {CategoryParamsOptionsType, ProductType, SuggestCategoryType} from "../types/types";
+import {CategoryParamsOptionsType, ProductType, SuggestCategoryType, previewType} from "../types/types";
 import {Formik, Form} from 'formik';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../store";
@@ -22,10 +22,11 @@ import {Contact} from "./Contact";
 export const CreateProductForm: React.FC<ProductType> = (props) => {
     const { t } = useTranslation();
     const [wasLoaded, setWasLoaded] = useState(false);
-
+    //@ts-ignore
     const product: ProductType = useSelector((state: AppStateType) => state.product.productData);
     const categoryParamOptions: CategoryParamsOptionsType = useSelector((state: AppStateType) => state.categorizedForm.categoryParamOptions);
-    const previewsFromStorage: Array<{ name: string, rotate: number }> = useSelector((state: any) => state.product.previews);
+    //@ts-ignore
+    const previewsFromStorage: Array<previewType> = useSelector((state: AppStateType) => state.product.previews);
     
     const dispatch = useDispatch();
     
@@ -36,15 +37,15 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
     }, [dispatch]);
     
     
-    const onSubmit = (values: any) => {
+    const onSubmit = (values: ProductType) => {
         if (values) {
             const formData = new FormData();
             for (let key in values) {
                 if (values.hasOwnProperty(key)) {
                     if (key === 'photos') {
-                        let photos: Array<{name: string, original: string}> = values[key];
-                        const resultPhotos: Array<{name: string; rotate: number}> = [];
-                        photos.forEach((photo: {name: string, original: string}) => {
+                        let photos = values[key];
+                        const resultPhotos: Array<previewType> = [];
+                        photos && photos.forEach((photo: {name: string, original: string}) => {
                             const idx = previewsFromStorage.findIndex((p) => p.name === photo.original);
                             if (idx >= 0) {
                                 resultPhotos.push({
@@ -54,19 +55,21 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
                             }
                         });
                         if (resultPhotos.length) {
-                            resultPhotos.forEach((photo: {name: string; rotate: number}, i: number) => {
+                            resultPhotos.forEach((photo: previewType, i: number) => {
                                 formData.append('photos[' + i + '][name]', photo.name);
                                 formData.append('photos[' + i + '][rotation]', `${photo.rotate}`);                    
                             });
                         }
 
                     } else if (key === 'filters') {
-                        let filters: any = values[key];
+                        let filters = values[key];
                         for (const filterName in filters) {
+                            //@ts-ignore
                             formData.append(`filters[${filterName}]`, filters[filterName])
                         }
                     }
                     else {
+                        //@ts-ignore
                         formData.append(key, values[key]);
                     }
                 }
@@ -74,9 +77,9 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
             if(categoryParamOptions.slug) {
                 formData.append('category_slug', categoryParamOptions.slug);
             }
-            dispatch(saveProduct(formData, (data: any) => {
+            dispatch(saveProduct(formData, (data) => {
                 if(data.success){
-                    // document.location.href = data.success;
+                    document.location.href = data.success;
                 }
             }));
         }
@@ -98,8 +101,10 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
                     .min(10, t("min", {min: 10}))
                     .max(256, t("max", {max: 255}))
                     .required(t('required')),
-                /*brand: Yup.string()
-                    .when('add_brand', function (this: any, value:any){if(!value) return this.required(t('required'))}),*/
+                brand: Yup.string()
+                    .when('add_brand', function (this: any, value:any){
+                        if(!value) return this.required(t('required'))
+                    }),
                 condition: Yup.string()
                     .required(t('required')),
                 price_current: Yup.number()
@@ -112,27 +117,27 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
                         ["price_current"],
                         (price_current: number, schema: any) => {
                             return !!price_current
-                                ? schema.moreThan(
-                                    price_current,
-                                    t("numberMin")
+                            ? schema.moreThan(
+                                price_current,
+                                t("numberMin")
                                 )
                                 : schema;
-                        }
-                    ),
-
+                            }
+                            ),
                 photos: Yup.array()
-                      .min(1, t("min",{ min: 1 }))
-                      .max(5, t("max",{ max: 5 }))
-                      .of(Yup.string().required())
-                      .required()
+                    .min(1, t("min",{ min: 1 }))
+                    .max(5, t("max",{ max: 5 }))
+                    .required(t('required')),
+                phone: Yup.string()
+                    .required(t('required')),    
             })
         }}
         onSubmit={onSubmit}
     >
-        {({values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit}) => (
-            <Form className="form" onSubmit={handleSubmit}>
+        {({values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit}) => {
+           return <Form className="form" onSubmit={handleSubmit}>
                 <FormikOnError>
-                    <Header actives={[1]} />
+                    <Header />
                     <div className="create_product__category" >
                         <div className="category_number">
                             <div className="number mobile_hide active">1</div>
@@ -170,7 +175,7 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
                     }
                 </FormikOnError>
             </Form>
-        )}
+        }}
     </Formik>
 }
 

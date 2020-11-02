@@ -31,6 +31,6 @@ export const Text = (props: PropsType) => {
             {input}
         <div className="input-cur">{placeholder}</div>
         </div>}
-        {error && touched && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
+        {(error && touched) && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
 };

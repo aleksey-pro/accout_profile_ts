@@ -32,6 +32,10 @@ export type FilterType = {
     key: string
     value: string
 }
+export type PhotoType = {
+    name: string, 
+    original: string
+}
 export type ProductType = {
     title?: string
     slug?: string
@@ -54,7 +58,7 @@ export type ProductType = {
     height?: string
     size?: string
     filters?: FilterType[]
-    photos?: string[]
+    photos?: PhotoType[]
 }
 
 export type MainFormFieldsType = {
@@ -101,5 +105,9 @@ export type preveiwImageType = {
     id: string,
 }
 
+export type previewType = {
+    name: string,
+    rotate: number,
+}
 
 export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never

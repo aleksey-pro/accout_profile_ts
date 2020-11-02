@@ -20,7 +20,7 @@ export const Textarea = (props: PropsType) => {
     const name = props.name;
     const placeholder = props.placeholder;
     const disabled = props.disabled;
-    const ref = React.useRef<HTMLInputElement | null>();
+    // const ref = React.useRef<HTMLInputElement | null>();
 
     const [
         field,
@@ -28,21 +28,19 @@ export const Textarea = (props: PropsType) => {
     ] = useField({
         name: name,
     });
-    console.log("Textarea -> error", error)
-    console.log("Textarea -> field", field)
 
     const onChange = (props.onChange)?props.onChange:()=>{};
 
-    React.useEffect(() => {
-        if(ref.current) {
-            ref.current.blur();
-        }
-    }, [error]);
+    // React.useEffect(() => {
+    //     if(ref.current) {
+    //         ref.current.blur();
+    //     }
+    // }, [error]);
 
     return <div className={"input-label " + name}>
         <label htmlFor={id}>{title}</label>
-        <Field as="textarea" id={id} placeholder={placeholder} name={name} innerRef={ref}
+        <textarea id={id} placeholder={placeholder} {...field}
                   onChange={(e:React.ChangeEvent<any>) => {onChange(e); field.onChange(e);}} disabled={disabled}/>
-        {error && touched &&  <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
+        {(error || touched) &&  <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
 };

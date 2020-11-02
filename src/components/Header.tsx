@@ -1,15 +1,21 @@
 import * as React from 'react';
 import {useTranslation} from "react-i18next";
+import { useFormikContext } from 'formik';
+import {ProductType} from '../types/types';
 
-type PropsType = {
-    actives: number[]
-}
-
-export const Header: React.FC<PropsType> = (props) => {
+export const Header: React.FC = () => {
     const { t } = useTranslation();
+    const { errors, values } = useFormikContext<ProductType>();
+    const [lineActive, setLineActive] = React.useState<boolean>(false);
+    const isActive = (inputValues: Array<string>): string => {
+        return inputValues && inputValues.every(val => Object.keys(values).includes(val)) 
+        && inputValues.every(val => !Object.keys(errors).includes(val)) ? " active" : "";
+    }
 
-    const isActive = (pos:number) => (props.actives.includes(pos))?" active":"";
-    const isFullActive = () => (props.actives.length === 5)?" active":"";
+    React.useEffect(() => {
+        const isFullActive = () => Object.keys(values).length > 0 && Object.keys(errors).length === 0;
+        setLineActive(isFullActive);
+    }, [errors, values ]);
 
     return (
         <>
@@ -20,15 +26,15 @@ export const Header: React.FC<PropsType> = (props) => {
             </div>
             <div className="progress_bar">
                 <div className="bar_high__items">
-                    <div className={"number" + isActive(1)}>1</div>
-                    <div className={"line" + isFullActive()} />
-                    <div className={"number" + isActive(2)}>2</div>
-                    <div className={"line" + isFullActive()} />
-                    <div className={"number" + isActive(3)}>3</div>
-                    <div className={"line" + isFullActive()} />
-                    <div className={"number" + isActive(4)}>4</div>
-                    <div className={"line" + isFullActive()} />
-                    <div className={"number" + isActive(5)}>5</div>
+                    <div className={"number" + isActive(['title', 'description'])}>1</div>
+                    <div className={`line ${lineActive ? "active" : ""}`} />
+                    <div className={"number" + isActive(['brand', 'condition'])}>2</div>
+                    <div className={`line ${lineActive ? "active" : ""}`} />
+                    <div className={"number" + isActive(['price_current', 'price_origin'])}>3</div>
+                    <div className={`line ${lineActive ? "active" : ""}`} />
+                    <div className={"number" + isActive(['photos'])}>4</div>
+                    <div className={`line ${lineActive ? "active" : ""}`} />
+                    <div className={"number" + isActive(['phone'])}>5</div>
                 </div>
                 <div className="bar_low__items">
                     <div className="text">{t('About product')}</div>

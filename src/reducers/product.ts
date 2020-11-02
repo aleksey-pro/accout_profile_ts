@@ -1,5 +1,5 @@
 import {productFormApi} from "../api/product-form-api";
-import {InferActionsTypes, ProductType, SuggestCategoryType, preveiwImageType } from "../types/types";
+import {InferActionsTypes, ProductType, SuggestCategoryType, preveiwImageType, previewType } from "../types/types";
 import {BaseThunkType} from "../store";
 import {photoApi} from "../api/photo-api";
 
@@ -8,6 +8,7 @@ let initialState = {
     suggestCategory: [] as SuggestCategoryType[],
     selectedSuggestCategory: [] as string[],
     setPreviewImages: [] as any,
+    previews: [] as any,
 };
 
 export const productReducer = (state = initialState, action: ActionsType) => {
@@ -15,6 +16,7 @@ export const productReducer = (state = initialState, action: ActionsType) => {
         case 'BB/SET_UPLOADED_PHOTO': {
             let photos: string[] = [];
             if (state.productData && state.productData.photos) {
+                //@ts-ignore
                 photos = state.productData.photos;
             }
             photos[action.key] = action.data;
@@ -38,7 +40,7 @@ export const actions = {
     setUploadedPhotoInfo: (data: any, key: number) => ({type: 'BB/SET_UPLOADED_PHOTO', data, key} as const),
     setSuggestCategory: (data: any) => ({type: 'BB/SET_SUGGEST_CATEGORY', data} as const),
     setSelectedSuggestCategory: (data: string[]) => ({type: 'BB/SET_SELECTED_SUGGEST_CATEGORY', data} as const),
-    setPreviewImages: (data: any) => ({type: 'BB/SET_PREVIEW_IMAGES', data} as const),
+    setPreviewImages: (data: previewType[]) => ({type: 'BB/SET_PREVIEW_IMAGES', data} as const),
 }
 
 export const uploadPhoto = (formData: FormData, key: number, afterResponseAction: (key:number, value:any) => void): ThunkType => async (dispatch) => {
@@ -71,7 +73,7 @@ export const saveProduct = (formData: FormData, afterResponseAction: (data: any)
     }
 }
 export const setPreviewImages = (data: Array<preveiwImageType>, afterResponseAction: (data: any) => void): ThunkType => async (dispatch) => {
-    const transformData = data
+    const transformData: previewType[] = data
         .filter((image: preveiwImageType) => image.preview)
         .map((img: preveiwImageType) => ({
             name: img.fileName,

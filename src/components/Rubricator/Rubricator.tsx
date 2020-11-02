@@ -17,6 +17,7 @@ export const Rubricator: React.FC<PropsType> = () => {
     const {t} = useTranslation();
 
     const categories = useSelector((state: AppStateType) => state.mainForm.categories);
+    //@ts-ignore
     const suggestCategory: SuggestCategoryType[] = useSelector((state: AppStateType) => state.product.suggestCategory);
 
     let [currentCategories, setCurrentCategories] = useState(categories);

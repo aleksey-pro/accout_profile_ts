@@ -130,6 +130,7 @@ export const Photo: React.FC = () => {
                         });
                         //@ts-ignore
                         setImages([...images, ...files ]);
+                        setUploadError('');
                     }
                     return;
                 }
@@ -146,7 +147,9 @@ export const Photo: React.FC = () => {
             </div>
             <div className="category_title">{t('Add a photo *')}</div>
             <div className="category_label">{t('You can add a minimum of 1 image and a maximum of 5.')}</div>
-            {errors && errors.file && <div className="msg_err__container"><span className="msg_err">{errors.file}</span></div>}                      
+            {errors && (errors.file || errors.photos) && <div className="msg_err__container">
+                <span className="msg_err">{errors.file || errors.photos}</span>
+            </div>}
             <div className="inputs-block">
                 {previews.map((image, indx) => (
                     <div className={`input-wrap ${indx >= 5 ? 'hidden' : ''}`} key={image.id}>

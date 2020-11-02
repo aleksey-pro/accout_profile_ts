@@ -42,7 +42,6 @@ export const Price: React.FC<PropsType> = (props) => {
                     id={'price'} name={'price_current'} 
                     placeholder={'0 грн'} 
                     placeholderIn={false} 
-                    required={true}
                     disabled={priceFree}/>
                 <Text
                     title={t('How much did you buy the product for?')}
@@ -50,11 +49,14 @@ export const Price: React.FC<PropsType> = (props) => {
                     name={'price_origin'}
                     placeholder={'0 грн'}
                     placeholderIn={false} 
-                    required={true} 
                     disabled={priceFree}/>
             </div>
-            <Textarea title={t('Additional condition of sale')} id={'additional_condition'} name={'additional_condition'}
-                      required={true} placeholder={t('For example, I will send only after subscription')} disabled={priceFree} />
+            <Textarea
+                title={t('Additional condition of sale')} 
+                id={'additional_condition'}
+                name={'additional_condition'}
+                placeholder={t('For example, I will send only after subscription')}
+                disabled={priceFree} />
             <div className="checkbox_items">
                 <Checkbox title={t('Bargaining is possible')} id={'bargain'} name={'is_bargain'} disabled={priceFree}/>
                 <Checkbox title={t('Barter is possible')} id={'barter'} name={'is_barter'} disabled={priceFree}/>
