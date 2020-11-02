@@ -68,15 +68,15 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
                     }
                     else {
                         formData.append(key, values[key]);
-                        if(categoryParamOptions.slug) {
-                            formData.append('category_slug', categoryParamOptions.slug);
-                        }
                     }
                 }
             }
+            if(categoryParamOptions.slug) {
+                formData.append('category_slug', categoryParamOptions.slug);
+            }
             dispatch(saveProduct(formData, (data: any) => {
                 if(data.success){
-                    document.location.href = data.success;
+                    // document.location.href = data.success;
                 }
             }));
         }
@@ -88,43 +88,45 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
 
     return <Formik
         initialValues={{}}
-        // validationSchema={() => {
-        //     return Yup.object().shape({
-        //         title: Yup.string()
-        //             .min(4, t("min", {min: 4}))
-        //             .max(256, t("max", {max: 256})),
-        //         description: Yup.string()
-        //             .min(10, t("min", {min: 10}))
-        //             .max(256, t("max", {max: 255})),
-        //         /*brand: Yup.string()
-        //             .when('add_brand', function (this: any, value:any){if(!value) return this.required(t('required'))}),*/
-        //         condition: Yup.string()
-        //             .required(t('required')),
-        //         price_current: Yup.number()
-        //             .typeError(t('number'))
-        //             .max(999999, t("numberMax"))
-        //             .required(t('required')),
-        //         price_origin: Yup.number()
-        //             .typeError(t('number'))
-        //             .when(
-        //                 ["price_current"],
-        //                 (price_current: number, schema: any) => {
-        //                     return !!price_current
-        //                         ? schema.moreThan(
-        //                             price_current,
-        //                             t("numberMin")
-        //                         )
-        //                         : schema;
-        //                 }
-        //             ),
+        validationSchema={() => {
+            return Yup.object().shape({
+                title: Yup.string()
+                    .min(4, t("min", {min: 4}))
+                    .max(256, t("max", {max: 256}))
+                    .required(t('required')),
+                description: Yup.string()
+                    .min(10, t("min", {min: 10}))
+                    .max(256, t("max", {max: 255}))
+                    .required(t('required')),
+                /*brand: Yup.string()
+                    .when('add_brand', function (this: any, value:any){if(!value) return this.required(t('required'))}),*/
+                condition: Yup.string()
+                    .required(t('required')),
+                price_current: Yup.number()
+                    .typeError(t('number'))
+                    .max(999999, t("numberMax"))
+                    .required(t('required')),
+                price_origin: Yup.number()
+                    .typeError(t('number'))
+                    .when(
+                        ["price_current"],
+                        (price_current: number, schema: any) => {
+                            return !!price_current
+                                ? schema.moreThan(
+                                    price_current,
+                                    t("numberMin")
+                                )
+                                : schema;
+                        }
+                    ),
 
-        //         /*photos: Yup.array()
-        //               .min(1, t("min",{ min: 1 }))
-        //               .max(5, t("max",{ max: 5 }))
-        //               .of(Yup.string().required())
-        //               .required()*/
-        //     })
-        // }}
+                photos: Yup.array()
+                      .min(1, t("min",{ min: 1 }))
+                      .max(5, t("max",{ max: 5 }))
+                      .of(Yup.string().required())
+                      .required()
+            })
+        }}
         onSubmit={onSubmit}
     >
         {({values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit}) => (

@@ -35,15 +35,15 @@ export const Name = React.forwardRef((props: PropsType, ref: any) => {
     };
 
     const nameInput = useRef<HTMLInputElement>(null);
-    const focusingNameField = () => {
-        if (nameInput && nameInput.current) {
-            nameInput.current.focus();
-        }
-    };
+    // const focusingNameField = () => {
+    //     if (nameInput && nameInput.current) {
+    //         nameInput.current.focus();
+    //     }
+    // };
 
     return <div className={"input-label " + name}>
         {title && <label htmlFor={id}>{title}</label>}
-        <input ref={ref} disabled={disabled} type="text" id={id} required={required} placeholder={placeholder}
+        <input ref={ref} disabled={disabled} type="text" id={id} placeholder={placeholder}
                onChange={(e: React.ChangeEvent<any>) => { onChange(e); field.onChange(e); }}/>
         {error && touched && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>

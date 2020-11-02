@@ -23,7 +23,7 @@ export const Contact: React.FC<PropsType> = (props) => {
                     <div className="number mobile_hide active">5</div>
                     {/*<div className="count_done">Заповнено 5/5</div>*/}
                 </div>
-                <TextWithMax title={'Вкажіть ціну товару *'} name={'phone'} id={'phone'} mask={'+38 9 99 99 99 999'} maskChar={' '} />
+                <TextWithMax title={'Вкажіть ціну товару *'} name={'phone'} id={'phone'} mask={'+380 (99) 999 99 99'} maskChar={' '} />
                 <div className="checkbox">
                     <Field type="checkbox" id="telephone" name="show_phone"/>
                     <label htmlFor="telephone">Показувати телефон в оголошенні</label>
