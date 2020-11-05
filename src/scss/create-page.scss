@@ -1056,11 +1056,16 @@ body {
                 border-radius: 5px;
                 cursor: pointer;
                 transition: color .15s, background .15s linear;
-                &[disabled="false"]:hover {
+                &:hover {
                     background: #FFFFFF;
                     box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
                 }
             }
+
+            .disabled {
+                pointer-events: none;
+            }
+
             .btn-dark {
                 @include btn;
                 width: 111px;
@@ -1068,8 +1073,15 @@ body {
                 margin: 0 5px;
                 background: #6354F4;
                 color: #FFFFFF;
+                box-sizing: border-box;
                 transition: color .15s, background .15s linear;
-                &[disabled="false"]:hover {
+
+                input {
+                    width: 1px;
+                    height: 1px;
+                }
+
+                &:hover {
                     background: #FFFFFF;
                     color: #6354F4;
                     box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);

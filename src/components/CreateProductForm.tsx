@@ -1,21 +1,21 @@
 import * as React from 'react';
-import {CategoryParamsOptionsType, ProductType, SuggestCategoryType, previewType} from "../types/types";
-import {Formik, Form} from 'formik';
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../store";
+import { CategoryParamsOptionsType, ProductType, SuggestCategoryType, previewType } from "../types/types";
+import { Formik, Form} from 'formik';
+import { useDispatch, useSelector } from "react-redux";
+import { AppStateType } from "../store";
 import * as Yup from 'yup';
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import "../i18next/translate";
-import {saveProduct} from "../reducers/product";
+import { saveProduct } from "../reducers/product";
 import FormikOnError from "./FormikOnError/FormikOnError";
-import {useEffect, useState} from "react";
-import {initData} from "../reducers/main-form-fields";
-import {Rubricator} from "./Rubricator/Rubricator";
-import {Details} from "./Details";
-import {Header} from "./Header";
-import {Brief} from "./Brief";
-import {Price} from "./Price";
-import {Photo} from "./Photo";
+import { useEffect, useState } from "react";
+import { initData } from "../reducers/main-form-fields";
+import { Rubricator } from "./Rubricator/Rubricator";
+import { Details } from "./Details";
+import { Header } from "./Header";
+import { Brief } from "./Brief";
+import { Price } from "./Price";
+import { Photo } from "./Photo";
 
 import {Contact} from "./Contact";
 
