@@ -15,9 +15,9 @@ export const productReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case 'BB/SET_UPLOADED_PHOTO': {
             let photos: string[] = [];
-            if (state.productData && state.productData.photos) {
+            if (state.productData && state.productData.imagePhotos) {
                 //@ts-ignore
-                photos = state.productData.photos;
+                photos = state.productData.imagePhotos;
             }
             photos[action.key] = action.data;
             return {...state, productData: {photos: [...photos]}}
@@ -44,34 +44,46 @@ export const actions = {
 }
 
 export const uploadPhoto = (formData: FormData, key: number, afterResponseAction: (key:number, value:any) => void): ThunkType => async (dispatch) => {
-    const data = await photoApi.uploadFile(formData)
-    if (!data.error) {
-        dispatch(actions.setUploadedPhotoInfo(data.success, key));
-        afterResponseAction(key, data.success);
-    } else {
-        afterResponseAction(key, data.error);
+    try {
+        const data = await photoApi.uploadFile(formData);
+        if (!data.error) {
+            dispatch(actions.setUploadedPhotoInfo(data.success, key));
+            afterResponseAction(key, data.success);
+        } else {
+            afterResponseAction(key, data.error);
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
 
 export const suggestCategoryByName = (name: string, afterResponseAction: (wasFound: boolean) => void): ThunkType => async (dispatch) => {
-    const data = await productFormApi.suggestCategoryByName(name);
-
-    if (!data.errors) {
-        dispatch(actions.setSuggestCategory(data.success));
-        afterResponseAction(true);
-    } else {
-        afterResponseAction(false);
+    try {    
+        const data = await productFormApi.suggestCategoryByName(name);
+        if (!data.errors) {
+            dispatch(actions.setSuggestCategory(data.success));
+            afterResponseAction(true);
+        } else {
+            afterResponseAction(false);
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
 
 export const saveProduct = (formData: FormData, afterResponseAction: (data: any) => void): ThunkType => async (dispatch) => {
-    const data = await productFormApi.saveProduct(formData);
-    if (data.errors === undefined) {
-        afterResponseAction(data);
-    } else {
-        afterResponseAction(data);
+    try {   
+        const data = await productFormApi.saveProduct(formData);
+        if (data.errors === undefined) {
+            afterResponseAction(data);
+        } else {
+            afterResponseAction(data);
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
+
 export const setPreviewImages = (data: Array<preveiwImageType>, afterResponseAction: (data: any) => void): ThunkType => async (dispatch) => {
     const transformData: previewType[] = data
         .filter((image: preveiwImageType) => image.preview)

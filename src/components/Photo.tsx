@@ -19,7 +19,7 @@ type ResponseImageType = {
 export const Photo: React.FC = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const { setValues, setFieldValue, values } = useFormikContext<ProductType>();
+    const { setValues, setFieldValue, values, touched, setFieldError } = useFormikContext<ProductType>();
     // console.log("Photo:React.FC -> values", values)
     const errors: FormikErrors<any> = useFormikContext().errors;
     const fileRef = React.useRef<HTMLInputElement | null>();
@@ -36,8 +36,6 @@ export const Photo: React.FC = () => {
         rotate: 0,
     }
     const [previews, setPreviews] = useState<Array<preveiwImageType>>([initialPreview]);
-    // console.log("Photo:React.FC -> previews", previews)
-    const [uploadPhotoError, setuploadPhotoError] = useState<string>();
 
     const handleClickUpload = (e:React.ChangeEvent<HTMLInputElement>): void => {
         if (e.target && e.target.files) setFiles(e.target.files);
@@ -48,7 +46,6 @@ export const Photo: React.FC = () => {
     }
 
     const handleClickReplace = (e:React.ChangeEvent<HTMLInputElement>, name: string, id: string): void => {
-    console.log("Photo:React.FC -> id", id)
         if (e.target && e.target.files && Array.from(e.target.files).length > 0) setFiles([e.target.files[0]]);
         setReplace({ name, id });
     }
@@ -66,7 +63,8 @@ export const Photo: React.FC = () => {
     }
 
     const setUploadError = (err: string) => {
-        setuploadPhotoError(err);
+        setFieldError('photos', err);
+        // setTouched({ imagePhotos: true });
         if (fileRef && fileRef.current) {
             fileRef.current.blur();
         }
@@ -85,7 +83,8 @@ export const Photo: React.FC = () => {
     });
 
     useEffect(() => {
-        if (previews && previews.length) {
+        if (previews && previews.length > 0) {
+            setUploadError('');
             dispatch(setPreviewImages((previews), () => {}));
         }
     }, [previews]);
@@ -128,38 +127,42 @@ export const Photo: React.FC = () => {
             const data = prepareDataToUpload();
             if (data) {
                 dispatch(uploadPhoto(data, 0, (key, data: Array<ResponseImageType> | string) => {
-                    const photos: Array<{name: string, original: string}> = [];
+                    const imagePhotos: Array<{name: string, original: string}> = [];
                     let error = false;
                     if (typeof data === 'object') {
                         data.forEach((el: ResponseImageType) => {
+                            //@ts-ignore
                             if(!el.name && el.error) {
                                 setUploadError(el.error)
                                 error = true;
                                 return;
                             }
-                            photos.push({ name: el.name, original: el['original-name'] });
-                            return photos;
+                            imagePhotos.push({ name: el.name, original: el['original-name'] });
+                            console.log("imagePhotos", imagePhotos)
+                            return imagePhotos;
                         })
                         if (!error) {
                             if (typeof replace === 'object') {
-                                const restFieldPhotos = values.photos?.filter(p => p.original !== replace.name);
+                                const restFieldPhotos = values.imagePhotos?.filter(p => p.original !== replace.name);
                                 //@ts-ignore
-                                setFieldValue('photos', [...restFieldPhotos, ...photos]);
+                                setFieldValue('photos', [...restFieldPhotos, ...imagePhotos]);
                                 const foundPreviewIndex = images.findIndex(image => image.id === replace.id);
                                 images.splice(foundPreviewIndex, 1, { file: Array.from(files)[0], id: uuidv4() })
                                 setImages([...images]);
+                                //@ts-ignore
                                 setUploadError('');
                                 return;
                             }
                             setValues({
                                 ...(values as object),
-                                photos,
+                                imagePhotos,
                             });
                             setImages(Array.from(files)
                                 .map(file => ({ file, id: uuidv4() }))
                                 //@ts-ignore
                                 .concat(images)
                             );
+                            //@ts-ignore
                             setUploadError('');
                         }
                         return;
@@ -178,8 +181,9 @@ export const Photo: React.FC = () => {
             </div>
             <div className="category_title">{t('Add a photo *')}</div>
             <div className="category_label">{t('You can add a minimum of 1 image and a maximum of 5.')}</div>
-            {errors && (errors.file || errors.photos) && <div className="msg_err__container">
-                <span className="msg_err">{errors.file || errors.photos}</span>
+            {//@ts-ignore
+            touched.photos && (errors.photos || errors.replace) && <div className="msg_err__container">
+                <span className="msg_err">{ errors.replace || errors.photos }</span>
             </div>}
             <div className="inputs-block">
                 {previews.map(({ preview, id, fileName, rotate }, indx) => (
@@ -201,8 +205,8 @@ export const Photo: React.FC = () => {
                                     innerRef={fileRef}
                                     previewId={id}
                                     // accept=".jpg, .jpeg, .png, .webp"
-                                    id="replace"                                    
-                                    validate={() => uploadPhotoError}
+                                    id="replace"
+                                    validate={setUploadError}
                                     multiple={false}
                                     onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
                                         console.log(e.currentTarget.name);
@@ -233,15 +237,15 @@ export const Photo: React.FC = () => {
                             {!preview && <>
                                 <Field
                                     type="file"
-                                    name="file"
+                                    name="photos"
                                     innerRef={fileRef}
                                     // accept=".jpg, .jpeg, .png, .webp"
-                                    id="file"
-                                    validate={() => uploadPhotoError}
+                                    id="photos"
+                                    validate={setUploadError}
                                     multiple={true}
                                     onChange={handleClickUpload}
                                 />
-                                <label className="text" htmlFor="file">
+                                <label className="text" htmlFor="photos">
                                     <span>{t('Click to download')}</span>
                                     <img src={uploadIcon} alt=""/>
                                 </label>

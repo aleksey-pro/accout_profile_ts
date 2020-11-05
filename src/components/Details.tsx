@@ -2,7 +2,7 @@ import * as React from 'react';
 import {CategoryParamsOptionsType, CategoryType, ProductType} from "../types/types";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../store";
-import {FieldArray} from "formik";
+import {ErrorMessage, FieldArray, useFormikContext} from "formik";
 import {useTranslation} from "react-i18next";
 import {Select} from "./Common/FormElements/Select";
 import {Color} from "./Common/FormElements/Color";
@@ -16,6 +16,7 @@ type PropsType = {
 
 export const Details: React.FC<PropsType> = (props) => {
     const { t } = useTranslation();
+    const { errors } = useFormikContext();
 
     let product = props.product;
 
@@ -51,7 +52,9 @@ export const Details: React.FC<PropsType> = (props) => {
             </div>}
             <Select title={t('In what condition is the goods? *')} placeholder={t('Start typing')}
                     id={'condition'} name={'condition'} options={fields.conditions} />
-            <Color title={t('Specify the color of the product *')} name={'color'} options={fields.colors} />
+            {//@ts-ignore
+                <Color errors={errors.color} title={t('Specify the color of the product *')} name={'color'} options={fields.colors} />
+            }
             <Select title={t('At what age is the product suitable?')} placeholder={t('Start typing')}
                     id={'year'} name={'year'} options={fields.years} />
             <Select title={t('What height is the product suitable for?')} placeholder={t('Start typing')}

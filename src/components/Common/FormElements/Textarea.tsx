@@ -15,32 +15,18 @@ type PropsType = {
 };
 
 export const Textarea = (props: PropsType) => {
-    const title = props.title;
-    const id = props.id;
-    const name = props.name;
-    const placeholder = props.placeholder;
-    const disabled = props.disabled;
-    // const ref = React.useRef<HTMLInputElement | null>();
-
+    const { title, id, name } = props;
     const [
         field,
         { error, touched },
     ] = useField({
         name: name,
     });
-
     const onChange = (props.onChange)?props.onChange:()=>{};
-
-    // React.useEffect(() => {
-    //     if(ref.current) {
-    //         ref.current.blur();
-    //     }
-    // }, [error]);
-
     return <div className={"input-label " + name}>
         <label htmlFor={id}>{title}</label>
-        <textarea id={id} placeholder={placeholder} {...field}
-                  onChange={(e:React.ChangeEvent<any>) => {onChange(e); field.onChange(e);}} disabled={disabled}/>
-        {(error || touched) &&  <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
+        <textarea {...field} {...props}
+                  onChange={(e:React.ChangeEvent<any>) => {onChange(e); field.onChange(e);}} />
+        {error && touched &&  <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
 };

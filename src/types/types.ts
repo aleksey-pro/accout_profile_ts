@@ -58,7 +58,7 @@ export type ProductType = {
     height?: string
     size?: string
     filters?: FilterType[]
-    photos?: PhotoType[]
+    imagePhotos?: PhotoType[]
 }
 
 export type MainFormFieldsType = {

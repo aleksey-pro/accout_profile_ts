@@ -16,26 +16,16 @@ type PropsType = {
 };
 
 export const TextWithMax = (props: PropsType) => {
-    const title = props.title;
-    const id = props.id;
-    const name = props.name;
-    const mask = props.mask;
-    const maskChar = props.maskChar;
-    const placeholder = props.placeholder;
-    const description = props.description;
-    const required = props.required;
-    const disabled = props.disabled;
-
+    const { title, id, name } = props;
     const [
         field,
         { error, touched },
     ] = useField({
         name: name,
     });
-
     return <div className="input-label">
         <label htmlFor={id}>{title}</label>
-        <ReactInputMask type="text" mask={mask} maskChar={maskChar} disabled={disabled} id={id} required={required} placeholder={placeholder} {...field} />
+        <ReactInputMask type="text" {...props} {...field} />
         {error && touched && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
 };

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {FormElementType, SelectOptionsType} from '../../../types/types';
-import {useField} from "formik";
+import { useField } from "formik";
 
 type PropsType = {
     title: string
     name: string
-    options: any
+    options: any,
+    errors: any,
 };
 
 type Color = {
@@ -14,27 +15,19 @@ type Color = {
 }
 
 export const Color = (props: PropsType) => {
-    const title = props.title;
-    const name = props.name;
-    const options = props.options;
-
-    const [
-        field,
-        { error, touched },
-    ] = useField({
-        name: name,
-    });
+    const { title, name, options, errors } = props;
+    const [field, { touched }] = useField({ name });
 
     const items = (options) ? options.map((data: any, i: number) => {
         let style:Color = {background: data.value};
-        if(data.value == '#fff') {
+        if(data.value === '#fff') {
             style = {border: '1px solid #eaeaf7', background: '#ffffff'};
         }
-        if(data.value == 'multicolor') {
+        if(data.value === 'multicolor') {
             style = {background: 'conic-gradient(from 180deg at 50% 50%, #3FF752 -28.03deg, #72E5FE 28.05deg, #287EFF 78.28deg, #9516F8 129.48deg, #FF2020 177.74deg, #FF9E0D 235.46deg, #FEF525 286.8deg, #3FF752 331.97deg, #72E5FE 388.05deg)'};
         }
         return <span key={i}>
-            <input type="radio" value={data.id} name={name} id={data.id}/>
+            <input type="radio" {...field} id={data.id} value={data.id} name={name}/>
             <label htmlFor={data.id} className="color">
                 <div className="content-color">
                     <div
@@ -57,6 +50,7 @@ export const Color = (props: PropsType) => {
                     {items}
                 </div>
             </div>
+            {errors && touched && <div className="msg_err__container"><span className="msg_err">{errors}</span></div>}
         </div>
     } else {
         return <></>;

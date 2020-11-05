@@ -15,28 +15,17 @@ type PropsType = {
 };
 
 export const Name = React.forwardRef((props: PropsType, ref: any) => {
-    const title = props.title;
-    const id = props.id;
-    const name = props.name;
-    const placeholder = props.placeholder;
-    const required = props.required;
-    const disabled = props.disabled;
-    const message = props.message;
-
+    const { title, id, name } = props;
     const [
         field,
         {error, touched},
-    ] = useField({
-        name: name,
-    });
+    ] = useField({ name });
 
-    const onChange = (props.onChange) ? props.onChange : () => {
-    };
+    const onChange = (props.onChange) ? props.onChange : () => {};
 
     return <div className={"input-label " + name}>
         {title && <label htmlFor={id}>{title}</label>}
-        <input disabled={disabled} type="text" id={id} placeholder={placeholder}
-               onChange={(e: React.ChangeEvent<any>) => { onChange(e); field.onChange(e); }}/>
-        {(error && touched) && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
+        <input type="text"  {...props} onChange={(e: React.ChangeEvent<any>) => { onChange(e); field.onChange(e); }}/>
+        {error && touched && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
 });

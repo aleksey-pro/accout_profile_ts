@@ -42,7 +42,7 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
             const formData = new FormData();
             for (let key in values) {
                 if (values.hasOwnProperty(key)) {
-                    if (key === 'photos') {
+                    if (key === 'imagePhotos') {
                         let photos = values[key];
                         const resultPhotos: Array<previewType> = [];
                         photos && photos.forEach((photo: {name: string, original: string}) => {
@@ -107,6 +107,8 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
                     }),
                 condition: Yup.string()
                     .required(t('required')),
+                color: Yup.string()
+                    .required(t('required')),
                 price_current: Yup.number()
                     .typeError(t('number'))
                     .max(999999, t("numberMax"))
@@ -125,8 +127,6 @@ export const CreateProductForm: React.FC<ProductType> = (props) => {
                             }
                             ),
                 photos: Yup.array()
-                    .min(1, t("min",{ min: 1 }))
-                    .max(5, t("max",{ max: 5 }))
                     .required(t('required')),
                 phone: Yup.string()
                     .required(t('required')),    

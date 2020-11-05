@@ -49,7 +49,6 @@ export const Brief: React.FC<PropsType> = (props) => {
         <Name
             id={'title'} 
             name={'title'}
-            required={true}
             placeholder={t('For example, a green polka dot H&M dress')}
             title={t('The name will appear at the top of your product page')}
             onChange={(e: any) => setSearchTerm(e.target.value)}
