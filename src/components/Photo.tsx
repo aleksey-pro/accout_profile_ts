@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
 import { Field, FormikErrors, useFormikContext } from 'formik';
 import { uploadPhoto, setPreviewImages } from "../reducers/product";
@@ -20,7 +20,6 @@ export const Photo: React.FC = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const { setValues, setFieldValue, values, touched, setFieldError } = useFormikContext<ProductType>();
-    // console.log("Photo:React.FC -> values", values)
     const errors: FormikErrors<any> = useFormikContext().errors;
     const fileRef = React.useRef<HTMLInputElement | null>();
     const [files, setFiles] = useState<ArrayLike<File>>();
@@ -36,6 +35,7 @@ export const Photo: React.FC = () => {
         rotate: 0,
     }
     const [previews, setPreviews] = useState<Array<preveiwImageType>>([initialPreview]);
+    console.log("Photo:React.FC -> previews", previews)
 
     const handleClickUpload = (e:React.ChangeEvent<HTMLInputElement>): void => {
         if (e.target && e.target.files) setFiles(e.target.files);
@@ -131,21 +131,19 @@ export const Photo: React.FC = () => {
                     let error = false;
                     if (typeof data === 'object') {
                         data.forEach((el: ResponseImageType) => {
-                            //@ts-ignore
                             if(!el.name && el.error) {
                                 setUploadError(el.error)
                                 error = true;
                                 return;
                             }
                             imagePhotos.push({ name: el.name, original: el['original-name'] });
-                            console.log("imagePhotos", imagePhotos)
                             return imagePhotos;
                         })
                         if (!error) {
                             if (typeof replace === 'object') {
                                 const restFieldPhotos = values.imagePhotos?.filter(p => p.original !== replace.name);
                                 //@ts-ignore
-                                setFieldValue('photos', [...restFieldPhotos, ...imagePhotos]);
+                                setFieldValue('imagePhotos', [...restFieldPhotos, ...imagePhotos]);
                                 const foundPreviewIndex = images.findIndex(image => image.id === replace.id);
                                 images.splice(foundPreviewIndex, 1, { file: Array.from(files)[0], id: uuidv4() })
                                 setImages([...images]);
@@ -162,7 +160,6 @@ export const Photo: React.FC = () => {
                                 //@ts-ignore
                                 .concat(images)
                             );
-                            //@ts-ignore
                             setUploadError('');
                         }
                         return;
@@ -187,7 +184,7 @@ export const Photo: React.FC = () => {
             </div>}
             <div className="inputs-block">
                 {previews.map(({ preview, id, fileName, rotate }, indx) => (
-                    <div className={`input-wrap ${indx >= 5 ? 'hidden' : ''}`} key={id}>
+                    <div className={`input-wrap ${indx >= 5 ? 'hidden' : ''}`} key={indx}>
                         <div className="block-photo__edit">
                             <button
                                 type={'button'}
@@ -196,26 +193,20 @@ export const Photo: React.FC = () => {
                                 <img src={deleteIcon} alt={t('Delete')} />
                             </button>
                             <label 
-                                htmlFor="replace"
-                                //@ts-ignore
+                                htmlFor={`replace-${id}`}
                                 className={`btn-dark ${!preview ? "disabled" : ""}`}>{t('Replace')}
                                 <Field
                                     type="file"
-                                    name="replace"
+                                    name={`replace[${id}]`}
                                     innerRef={fileRef}
                                     previewId={id}
-                                    // accept=".jpg, .jpeg, .png, .webp"
-                                    id="replace"
+                                    accept=".jpg, .jpeg, .png, .webp"
+                                    id={`replace-${id}`}
                                     validate={setUploadError}
                                     multiple={false}
                                     onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
-                                        console.log(e.currentTarget.name);
-                                        //@ts-ignore
-                                        const propsId = e.currentTarget.attributes['previewId'].value;
-                                        console.log("propsId", propsId)
-                                        console.log("images", images)
-                                        const foundId = images[indx].id;
-                                        handleClickReplace(e, fileName, foundId);
+                                        console.log(e.currentTarget);
+                                        handleClickReplace(e, fileName, id);
                                     }}
                                 />   
                             </label>
@@ -239,7 +230,7 @@ export const Photo: React.FC = () => {
                                     type="file"
                                     name="photos"
                                     innerRef={fileRef}
-                                    // accept=".jpg, .jpeg, .png, .webp"
+                                    accept=".jpg, .jpeg, .png, .webp"
                                     id="photos"
                                     validate={setUploadError}
                                     multiple={true}
