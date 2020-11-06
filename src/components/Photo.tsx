@@ -23,11 +23,8 @@ export const Photo: React.FC = () => {
     const errors: FormikErrors<any> = useFormikContext().errors;
     const fileRef = React.useRef<HTMLInputElement | null>();
     const [files, setFiles] = useState<ArrayLike<File>>();
-    // console.log("Photo:React.FC -> files", files)
     const [replace, setReplace] = useState<boolean | { name: string, id: string }>(false);
-    // console.log("Photo:React.FC -> replace", replace)
     const [images, setImages] = useState<Array<{ file: File | null, id: string }>>([{ file: null, id: '' }]);
-    // console.log("Photo:React.FC -> images", images)
     const initialPreview = {
         preview: '',
         id: '',
@@ -35,7 +32,6 @@ export const Photo: React.FC = () => {
         rotate: 0,
     }
     const [previews, setPreviews] = useState<Array<preveiwImageType>>([initialPreview]);
-    console.log("Photo:React.FC -> previews", previews)
 
     const handleClickUpload = (e:React.ChangeEvent<HTMLInputElement>): void => {
         if (e.target && e.target.files) setFiles(e.target.files);
@@ -204,10 +200,7 @@ export const Photo: React.FC = () => {
                                     id={`replace-${id}`}
                                     validate={setUploadError}
                                     multiple={false}
-                                    onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
-                                        console.log(e.currentTarget);
-                                        handleClickReplace(e, fileName, id);
-                                    }}
+                                    onChange={(e:React.ChangeEvent<HTMLInputElement>) => handleClickReplace(e, fileName, id)}
                                 />   
                             </label>
                             <button 

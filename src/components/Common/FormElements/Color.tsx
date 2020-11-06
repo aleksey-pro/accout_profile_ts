@@ -15,8 +15,8 @@ type Color = {
 }
 
 export const Color = (props: PropsType) => {
-    const { title, name, options, errors } = props;
-    const [field, { touched }] = useField({ name });
+    const { title, name, options } = props;
+    const [field] = useField({ name });
 
     const items = (options) ? options.map((data: any, i: number) => {
         let style:Color = {background: data.value};
@@ -50,7 +50,6 @@ export const Color = (props: PropsType) => {
                     {items}
                 </div>
             </div>
-            {errors && touched && <div className="msg_err__container"><span className="msg_err">{errors}</span></div>}
         </div>
     } else {
         return <></>;
