@@ -5,9 +5,7 @@ import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
 import { Field, FormikErrors, useFormikContext } from 'formik';
 import { uploadPhoto, setPreviewImages } from "../reducers/product";
-import deleteIcon from "../assets/img/del.svg";
-import rotateIcon from "../assets/img/rotate.svg";
-import uploadIcon from "../assets/img/upload_icon_1.svg";
+import apiUrl from "../apiUrl";
 import { preveiwImageType, ProductType } from '../types/types';
 
 type ResponseImageType = {
@@ -186,7 +184,7 @@ export const Photo: React.FC = () => {
                                 type={'button'}
                                 className={`delete ${!preview ? "disabled" : ""}`} 
                                 onClick={(e) => handleClickRemove(e, id)}>
-                                <img src={deleteIcon} alt={t('Delete')} />
+                                <img src={apiUrl + "/assets/img/del.svg"} alt={t('Delete')} />
                             </button>
                             <label 
                                 htmlFor={`replace-${id}`}
@@ -208,7 +206,7 @@ export const Photo: React.FC = () => {
                                 disabled={!preview}
                                 className={`rotate ${!preview ? "disabled" : ""}`} 
                                 onClick={(e) => handleClickRotate(e, id)}>
-                                <img src={rotateIcon} alt={t('Rotate')} />
+                                <img src={apiUrl + "/assets/img/rotate.svg"} alt={t('Rotate')} />
                             </button>
                         </div>
                         <div className="input">
@@ -231,7 +229,7 @@ export const Photo: React.FC = () => {
                                 />
                                 <label className="text" htmlFor="photos">
                                     <span>{t('Click to download')}</span>
-                                    <img src={uploadIcon} alt=""/>
+                                    <img src={apiUrl + "/assets/img/upload_icon_1.svg"} alt=""/>
                                 </label>
                             </>}
                         </div>                        
