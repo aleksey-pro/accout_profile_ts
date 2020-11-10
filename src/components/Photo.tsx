@@ -19,6 +19,7 @@ export const Photo: React.FC = () => {
     const dispatch = useDispatch();
     const { setValues, setFieldValue, values, touched, setFieldError } = useFormikContext<ProductType>();
     const errors: FormikErrors<any> = useFormikContext().errors;
+    // console.log("Photo:React.FC -> errors", errors)
     const fileRef = React.useRef<HTMLInputElement | null>();
     const [files, setFiles] = useState<ArrayLike<File>>();
     const [replace, setReplace] = useState<boolean | { name: string, id: string }>(false);
@@ -56,12 +57,16 @@ export const Photo: React.FC = () => {
         }
     }
 
-    const setUploadError = (err: string) => {
-        setFieldError('photos', err);
-        // setTouched({ imagePhotos: true });
+    const setUploadError = (errors: string | Array<string>) => {
         if (fileRef && fileRef.current) {
             fileRef.current.blur();
         }
+        // // setTouched({ imagePhotos: true });
+        if(typeof errors === 'string') {
+            setFieldError('photos', errors)
+            return;
+        };
+        setFieldError('photos', `${errors.join('\r\n')}`);
     }
 
     const ImageLoader = (value: File | null) => new Promise((resolve) => {
@@ -78,7 +83,7 @@ export const Photo: React.FC = () => {
 
     useEffect(() => {
         if (previews && previews.length > 0) {
-            setUploadError('');
+            // setUploadError('');
             dispatch(setPreviewImages((previews), () => {}));
         }
     }, [previews]);
@@ -121,41 +126,40 @@ export const Photo: React.FC = () => {
             const data = prepareDataToUpload();
             if (data) {
                 dispatch(uploadPhoto(data, 0, (key, data: Array<ResponseImageType> | string) => {
-                    const imagePhotos: Array<{name: string, original: string}> = [];
-                    let error = false;
                     if (typeof data === 'object') {
+                        const imagePhotos: Array<{name: string, original: string}> = [];
+                        const uploadErrors: Array<string> = [];
                         data.forEach((el: ResponseImageType) => {
                             if(!el.name && el.error) {
-                                setUploadError(el.error)
-                                error = true;
-                                return;
+                                uploadErrors.push(`${el['original-name']} - ${el.error}`);
+                                return uploadErrors;
+                            } else {
+                                imagePhotos.push({ name: el.name, original: el['original-name'] });
                             }
-                            imagePhotos.push({ name: el.name, original: el['original-name'] });
                             return imagePhotos;
                         })
-                        if (!error) {
-                            if (typeof replace === 'object') {
-                                const restFieldPhotos = values.imagePhotos?.filter(p => p.original !== replace.name);
+                        uploadErrors.length > 0 ? setUploadError(uploadErrors) : setUploadError('');
+                        if (typeof replace === 'object') {
+                            const restFieldPhotos = values.imagePhotos?.filter(p => p.original !== replace.name);
+                            if(!uploadErrors || uploadErrors.length === 0) {
                                 //@ts-ignore
                                 setFieldValue('imagePhotos', [...restFieldPhotos, ...imagePhotos]);
                                 const foundPreviewIndex = images.findIndex(image => image.id === replace.id);
-                                images.splice(foundPreviewIndex, 1, { file: Array.from(files)[0], id: uuidv4() })
+                                images.splice(foundPreviewIndex, 1, { file: Array.from(files)[0], id: uuidv4() });
                                 setImages([...images]);
-                                //@ts-ignore
-                                setUploadError('');
-                                return;
                             }
-                            setValues({
-                                ...(values as object),
-                                imagePhotos,
-                            });
-                            setImages(Array.from(files)
-                                .map(file => ({ file, id: uuidv4() }))
-                                //@ts-ignore
-                                .concat(images)
-                            );
-                            setUploadError('');
+                            return;
                         }
+                        setValues({
+                            ...(values as object),
+                            imagePhotos,
+                        });
+                        setImages(Array.from(files)
+                            .filter(f => imagePhotos.findIndex(image => image.original === f.name) >= 0)
+                            .map(file => ({ file, id: uuidv4() }))
+                            //@ts-ignore
+                            .concat(images)
+                        );
                         return;
                     }
                     setUploadError(data);

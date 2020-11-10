@@ -1203,7 +1203,9 @@ body {
     }
 
     .msg_err {
+        display: inline-block;
         color: red;
         margin-left: 4px;
+        white-space: pre;
     }
 }
