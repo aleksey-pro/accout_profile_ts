@@ -83,7 +83,7 @@ export const Photo: React.FC = () => {
 
     useEffect(() => {
         if (previews && previews.length > 0) {
-            // setUploadError('');
+            setUploadError('');
             dispatch(setPreviewImages((previews), () => {}));
         }
     }, [previews]);
