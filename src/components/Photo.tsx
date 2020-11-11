@@ -7,6 +7,7 @@ import { Field, FormikErrors, useFormikContext } from 'formik';
 import { uploadPhoto, setPreviewImages } from "../reducers/product";
 import apiUrl from "../apiUrl";
 import { preveiwImageType, ProductType } from '../types/types';
+import { idText } from 'typescript';
 
 type ResponseImageType = {
     name: string,
@@ -24,6 +25,7 @@ export const Photo: React.FC = () => {
     const [files, setFiles] = useState<ArrayLike<File>>();
     const [replace, setReplace] = useState<boolean | { name: string, id: string }>(false);
     const [images, setImages] = useState<Array<{ file: File | null, id: string }>>([{ file: null, id: '' }]);
+    console.log("Photo:React.FC -> images", images)
     const initialPreview = {
         preview: '',
         id: '',
@@ -31,12 +33,14 @@ export const Photo: React.FC = () => {
         rotate: 0,
     }
     const [previews, setPreviews] = useState<Array<preveiwImageType>>([initialPreview]);
+    console.log("Photo:React.FC -> previews", previews)
 
     const handleClickUpload = (e:React.ChangeEvent<HTMLInputElement>): void => {
         if (e.target && e.target.files) setFiles(e.target.files);
     }
 
     const handleClickRemove = (e:React.MouseEvent<HTMLButtonElement>, id?: string): void => {
+    console.log("Photo:React.FC -> id", id)
         if (id) setImages(images.filter((image) => image.id !== id));
     }
 
@@ -83,7 +87,6 @@ export const Photo: React.FC = () => {
 
     useEffect(() => {
         if (previews && previews.length > 0) {
-            setUploadError('');
             dispatch(setPreviewImages((previews), () => {}));
         }
     }, [previews]);
@@ -96,14 +99,12 @@ export const Photo: React.FC = () => {
                 if (file) {
                     promises.push(
                         ImageLoader(file).then((data: any) => {
-                            if (previews.length <= 5) {
-                                filesList.push({
-                                    preview: data.file,
-                                    id: id,
-                                    rotate: 0,
-                                    fileName: file.name,
-                                });
-                            }
+                            filesList.push({
+                                preview: data.file,
+                                id: id,
+                                rotate: 0,
+                                fileName: file.name,
+                            });
                         })
                     )
                 }
@@ -154,12 +155,18 @@ export const Photo: React.FC = () => {
                             ...(values as object),
                             imagePhotos,
                         });
-                        setImages(Array.from(files)
-                            .filter(f => imagePhotos.findIndex(image => image.original === f.name) >= 0)
-                            .map(file => ({ file, id: uuidv4() }))
-                            //@ts-ignore
-                            .concat(images)
-                        );
+                        if((images.length + Array.from(files).length) > 6) {
+                            setUploadError(t('You can add a minimum of 1 image and a maximum of 5.'));
+                            return;
+                        }
+                        if (images.length <= 5) {
+                            setImages(Array.from(files)
+                                .filter(f => imagePhotos.findIndex(image => image.original === f.name) >= 0)
+                                .map(file => ({ file, id: uuidv4() }))
+                                //@ts-ignore
+                                .concat(images)
+                            );
+                        }
                         return;
                     }
                     setUploadError(data);
