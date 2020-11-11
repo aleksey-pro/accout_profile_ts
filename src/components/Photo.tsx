@@ -155,14 +155,12 @@ export const Photo: React.FC = () => {
                             setUploadError(t('You can add a minimum of 1 image and a maximum of 5.'));
                             return;
                         }
-                        if (images.length <= 5) {
-                            setImages(Array.from(files)
-                                .filter(f => imagePhotos.findIndex(image => image.original === f.name) >= 0)
-                                .map(file => ({ file, id: uuidv4() }))
-                                //@ts-ignore
-                                .concat(images)
-                            );
-                        }
+                        setImages(Array.from(files)
+                            .filter(f => imagePhotos.findIndex(image => image.original === f.name) >= 0)
+                            .map(file => ({ file, id: uuidv4() }))
+                            //@ts-ignore
+                            .concat(images)
+                        );
                         return;
                     }
                     setUploadError(data);
