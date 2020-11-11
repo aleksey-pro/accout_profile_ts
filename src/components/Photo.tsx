@@ -37,7 +37,6 @@ export const Photo: React.FC = () => {
     }
 
     const handleClickRemove = (e:React.MouseEvent<HTMLButtonElement>, id?: string): void => {
-    console.log("Photo:React.FC -> id", id)
         if (id) setImages(images.filter((image) => image.id !== id));
     }
 
