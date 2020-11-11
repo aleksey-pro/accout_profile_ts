@@ -20,12 +20,10 @@ export const Photo: React.FC = () => {
     const dispatch = useDispatch();
     const { setValues, setFieldValue, values, touched, setFieldError } = useFormikContext<ProductType>();
     const errors: FormikErrors<any> = useFormikContext().errors;
-    // console.log("Photo:React.FC -> errors", errors)
     const fileRef = React.useRef<HTMLInputElement | null>();
     const [files, setFiles] = useState<ArrayLike<File>>();
     const [replace, setReplace] = useState<boolean | { name: string, id: string }>(false);
     const [images, setImages] = useState<Array<{ file: File | null, id: string }>>([{ file: null, id: '' }]);
-    console.log("Photo:React.FC -> images", images)
     const initialPreview = {
         preview: '',
         id: '',
@@ -33,7 +31,6 @@ export const Photo: React.FC = () => {
         rotate: 0,
     }
     const [previews, setPreviews] = useState<Array<preveiwImageType>>([initialPreview]);
-    console.log("Photo:React.FC -> previews", previews)
 
     const handleClickUpload = (e:React.ChangeEvent<HTMLInputElement>): void => {
         if (e.target && e.target.files) setFiles(e.target.files);
