@@ -1,13 +1,15 @@
-import React from 'react';
-import { Profile } from './components/Profile'
-import './styles/App.scss'
+import React, { useReducer } from 'react';
+import { UserContext, appReducer, initialState } from "./reducer";
+import Profile from './components/Profile';
+import './styles/my_account.scss';
 
 function App() {
+  const [store, dispatch] = useReducer(appReducer, initialState);
   return (
-    <div className="App">
+    <UserContext.Provider value={{ store, dispatch }}>
       <Profile />
-    </div>
+    </UserContext.Provider>
   );
 }
 
-export default App
+export default App;

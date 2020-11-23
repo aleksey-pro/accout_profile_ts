@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const Dotenv = require('dotenv-webpack');
 const devMode = process.env.NODE_ENV !== 'production'
 const paths = {
   src: path.join(__dirname, "src"),
@@ -81,5 +82,6 @@ module.exports = {
       filename: devMode ? '[name].css' : 'styles/[name].css',
       chunkFilename: devMode ? '[id].css' : 'styles/[id].css',
     }),
+    new Dotenv(),
   ],
 }
