@@ -34,14 +34,14 @@ export const appReducer = (state = initialState, action) => {
     }
 };
 
-export function initUser(data) {
+export const initUser = (data) => {
     return {
 		type: "INIT_USER",
 		payload: data,
 	};
 }
 
-export function setUser(data) {
+export const setUser = (data) => {
 	return {
 		type: "SET_USER",
 		payload: data,

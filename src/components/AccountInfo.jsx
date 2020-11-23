@@ -7,7 +7,7 @@ import imgCalendar from '../assets/img/calendar.png';
 import imgMessage from '../assets/img/message.svg';
 import { UserContext } from '../reducer';
  
-export default function AccountInfo () {
+export default function AccountInfo ({ setModalOpen }) {
     const { store: { user } } = useContext(UserContext);
     const { avatar, name, surname, city, socialAccountUrl } = user;
     const userAvatar = avatar || imgUser;
@@ -17,7 +17,10 @@ export default function AccountInfo () {
                 <div className="avatar">
                     <img src={userAvatar} alt="" />
                     <div className="avatar-change-wrap">
-                        <div data-fancybox data-src="#modal-change-avatar" className="change-avatar">
+                        <div data-fancybox 
+                        data-src="#modal-change-avatar" 
+                        onClick={() => setModalOpen(true)} 
+                        className="change-avatar">
                             <span>Обновить фото</span>
                         </div>
                     </div>

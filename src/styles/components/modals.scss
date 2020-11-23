@@ -1,3 +1,17 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(29, 29, 30, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
 .fancybox-slide{
   padding: 0;
 }
