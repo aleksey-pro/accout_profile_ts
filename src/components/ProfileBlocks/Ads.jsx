@@ -8,17 +8,20 @@ const statusMap = [
     { title: 'На проверке', status: 2 },
     { title: 'Продано', status: 3 },
 ]
+const getProductsFiltered = (products) => {
+    return statusMap.reduce((acc, cur) => {
+        if(cur.status === 0) return { 0: products };
+            return Object.assign(acc, 
+                { [cur.status]: products.filter(d => d.status === cur.status) }
+            )
+    }, {})
+}
 
 export default function Ads () {
     const { store: { user: { products = [] } = {} } } = useContext(UserContext);
-    const productsFiltered = {
-        0: products,
-        1: products.filter(d => d.status === 1),
-        2: products.filter(d => d.status === 2),
-        3: products.filter(d => d.status === 3),
-    };
-    const [items, setItems] = useState(products);
-    const setFilter = (status) => setItems(productsFiltered[status]);
+    const items = getProductsFiltered(products)
+    const [filter, setFilter] = useState(0);
+    const handleClick = (f) => setFilter(f);
 
     return <div className="accordion_item">
         <h3 className="tab_accordion">Мои объявления</h3>
@@ -31,12 +34,12 @@ export default function Ads () {
                             </a>
                         </li>
                         {statusMap.map((v, i) => <li key={i}>
-                            <button className="nav-item active" onClick={() => setFilter(v.status)}>{v.title}</button>
-                            <span className="quantity">{productsFiltered[v.status].length}</span>
+                            <button className="nav-item active" onClick={() => handleClick(v.status)}>{v.title}</button>
+                            <span className="quantity">{items[v.status].length}</span>
                         </li>)}
                     </ul>
                     <div className="cards">
-                        {items.map((product, i) => {
+                        {items[filter].map((product, i) => {
                             const { image, rank, age, brand, price, title } = product;
                             return <a href="/" className="product-card-view" key={i}>
                                 <div className="img-container">
