@@ -1,6 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../reducer';
 
+
+const statusMap = [
+    { title: 'Все', status: 0 },
+    { title: 'В продаже', status: 1 },
+    { title: 'На проверке', status: 2 },
+    { title: 'Продано', status: 3 },
+]
+
 export default function Ads () {
     const { store: { user: { products = [] } = {} } } = useContext(UserContext);
     const productsFiltered = {
@@ -13,7 +21,7 @@ export default function Ads () {
     const setFilter = (status) => setItems(productsFiltered[status]);
 
     return <div className="accordion_item">
-        <h3 className="tab_accordion" rel="tab2">Мои объявления</h3>
+        <h3 className="tab_accordion">Мои объявления</h3>
         <div className="tab_content">
             <div className="container">
                 <div className="ad-container">
@@ -22,22 +30,10 @@ export default function Ads () {
                                 Подать объявление
                             </a>
                         </li>
-                        <li>
-                            <button className="nav-item active" onClick={() => setFilter(0)}>Все</button>
-                            <span className="quantity">{productsFiltered[0].length}</span>
-                        </li>
-                        <li>
-                            <button className="nav-item" onClick={() => setFilter(1)}>В продаже</button>
-                            <span className="quantity">{productsFiltered[1].length}</span>
-                        </li>
-                        <li>
-                            <button className="nav-item" onClick={() => setFilter(2)}>На проверке</button>
-                            <span className="quantity">{productsFiltered[2].length}</span>
-                        </li>
-                        <li>
-                            <button className="nav-item" onClick={() => setFilter(3)}>Продано</button>
-                            <span className="quantity">{productsFiltered[3].length}</span>
-                        </li>
+                        {statusMap.map((v, i) => <li key={i}>
+                            <button className="nav-item active" onClick={() => setFilter(v.status)}>{v.title}</button>
+                            <span className="quantity">{productsFiltered[v.status].length}</span>
+                        </li>)}
                     </ul>
                     <div className="cards">
                         {items.map((product, i) => {
