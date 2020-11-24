@@ -44,7 +44,7 @@ export default function ProfileForm() {
     }
     return <Formik
         initialValues={user}
-        validationSchema={validationSchema}
+        // validationSchema={validationSchema}
         onSubmit={onSubmit}
     >
         {({values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit}) => {

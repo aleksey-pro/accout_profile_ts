@@ -422,6 +422,8 @@ select {
 
   .nav-item {
     color: #000;
+    font: inherit;
+    padding: 0;
 
     &.active {
       color: #4735f1;

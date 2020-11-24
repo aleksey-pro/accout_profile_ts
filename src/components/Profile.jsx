@@ -19,9 +19,9 @@ export default function Profile () {
     const { dispatch } = useContext(UserContext);
     const [isModalOpen, setModalIsOpen] = useState(false);
     
-    useEffect(() => {
-        getUser().then(data => dispatch(initUser(data)));
-    }, []);
+    // useEffect(() => {
+    //     getUser().then(data => dispatch(initUser(data)));
+    // }, []);
     
     return <div className="my-account">
         <AccountHeader />

@@ -1,4 +1,5 @@
 import React from "react";
+import imgQ2 from './assets/img/q2.png';
 
 export const UserContext = React.createContext();
 export const initialState = {
@@ -11,7 +12,35 @@ export const initialState = {
         city: 'Кропивницкий',
         socialAccountUrl: '',
         about: 'some info about...',
-        products: [],
+        products: [
+            {
+                title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
+                image: imgQ2,
+                rank: 'Опытный продавец',
+                price: 200,
+                age: '4-5 лет',
+                brand: 'Zara1',
+                status: 1,
+              },
+              {
+                title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
+                image: imgQ2,
+                rank: 'Опытный продавец',
+                price: 200,
+                age: '4-5 лет',
+                brand: 'Zara2',
+                status: 1,
+              },
+                {
+                title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
+                image: imgQ2,
+                rank: 'Опытный продавец',
+                price: 200,
+                age: '4-5 лет',
+                brand: 'Zara3',
+                status: 2,
+              },
+        ],
         testimonials: [],
         favourites: [],
     }
