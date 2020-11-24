@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../reducer';
-import { initUser } from '../api';
+import { getUser } from '../api';
+import { UserContext, initUser } from '../reducer';
 import Tabs from './Tabs';
 import Tab from './Tabs/Tab';
 
@@ -18,11 +18,9 @@ import ChangeAvatar from '../Modals/ChangeAvatar';
 export default function Profile () {
     const { dispatch } = useContext(UserContext);
     const [isModalOpen, setModalIsOpen] = useState(false);
-    console.log("🚀 ~ file: Profile.jsx ~ line 21 ~ Profile ~ isModalOpen", isModalOpen)
-
     
     useEffect(() => {
-        initUser().then(data => dispatch(initUser(data)));
+        getUser().then(data => dispatch(initUser(data)));
     }, []);
     
     return <div className="my-account">

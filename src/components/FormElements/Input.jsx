@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useField} from "formik";
+import { useField } from "formik";
 
 export default function Input (props) {
     const { title, id, name } = props;
@@ -11,5 +11,5 @@ export default function Input (props) {
         {title && <label htmlFor={id}>{title}</label>}
         <input {...props} {...field}/>
         {error && touched && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
-    </div>
+    </div>;
 };

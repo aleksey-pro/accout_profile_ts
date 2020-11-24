@@ -4,9 +4,9 @@ import * as Yup from 'yup';
 import { updateUser } from '../../../api';
 import { UserContext, setUser } from '../../../reducer';
 
-import Input from '../../Form/Input';
-import Phone from '../../Form/Phone';
-import Textarea from '../../Form/Textarea';
+import Input from '../../FormElements/Input';
+import Phone from '../../FormElements/Phone';
+import Textarea from '../../FormElements/Textarea';
 import imgFacebook from '../../../assets/img/facebook.svg';
 import imgGoogle from '../../../assets/img/google.svg';
 
@@ -25,7 +25,7 @@ const validationSchema = Yup.object().shape({
 
 
 export default function ProfileForm() {
-    const { store: { user }, dispatch } = useContext(UserContext);
+    const { store: { user = {} }, dispatch } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const responseHandler = (response) => {

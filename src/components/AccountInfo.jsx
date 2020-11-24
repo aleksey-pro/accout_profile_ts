@@ -8,7 +8,7 @@ import imgMessage from '../assets/img/message.svg';
 import { UserContext } from '../reducer';
  
 export default function AccountInfo ({ setModalOpen }) {
-    const { store: { user } } = useContext(UserContext);
+    const { store: { user = {} } } = useContext(UserContext);
     const { avatar, name, surname, city, socialAccountUrl } = user;
     const userAvatar = avatar || imgUser;
     return <section className="main-account-info">
