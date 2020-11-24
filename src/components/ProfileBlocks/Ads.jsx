@@ -1,25 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../reducer';
-
+import { getItemsFiltered } from '../../utils';
 
 const statusMap = [
     { title: 'Все', status: 0 },
     { title: 'В продаже', status: 1 },
     { title: 'На проверке', status: 2 },
     { title: 'Продано', status: 3 },
-]
-const getProductsFiltered = (products) => {
-    return statusMap.reduce((acc, cur) => {
-        if(cur.status === 0) return { 0: products };
-            return Object.assign(acc, 
-                { [cur.status]: products.filter(d => d.status === cur.status) }
-            )
-    }, {})
-}
+];
 
 export default function Ads () {
     const { store: { user: { products = [] } = {} } } = useContext(UserContext);
-    const items = getProductsFiltered(products)
+    const items = getItemsFiltered(statusMap, products);
     const [filter, setFilter] = useState(0);
     const handleClick = (f) => setFilter(f);
 

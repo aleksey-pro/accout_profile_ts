@@ -1,5 +1,6 @@
 import React from "react";
 import imgQ2 from './assets/img/q2.png';
+import imgUser from './assets/img/user.png';
 
 export const UserContext = React.createContext();
 export const initialState = {
@@ -21,8 +22,8 @@ export const initialState = {
                 age: '4-5 лет',
                 brand: 'Zara1',
                 status: 1,
-              },
-              {
+            },
+            {
                 title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
                 image: imgQ2,
                 rank: 'Опытный продавец',
@@ -30,8 +31,8 @@ export const initialState = {
                 age: '4-5 лет',
                 brand: 'Zara2',
                 status: 1,
-              },
-                {
+            },
+            {
                 title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
                 image: imgQ2,
                 rank: 'Опытный продавец',
@@ -39,10 +40,41 @@ export const initialState = {
                 age: '4-5 лет',
                 brand: 'Zara3',
                 status: 2,
-              },
+            },
         ],
-        testimonials: [],
-        favourites: [],
+        testimonials: [
+            {
+                image: imgUser,
+                rating: '',
+                fullname: 'Ольга Марозова',
+                city: 'г. Кропивницкий',
+                purchased: 'Сарафан зеленый для девочки в горошек новый | 200 грн',
+                feedbackText: 'Рекомендую!',
+                date: '11 ноября 2018 г., 12:56',
+                feedbackStatus: 'Новый',
+                status: 1
+            }
+        ],
+        favourites: [
+            {
+                title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
+                image: imgQ2,
+                rank: 'Опытный продавец',
+                price: 200,
+                age: '4-5 лет',
+                brand: 'Zara1',
+                status: 1,
+            },
+            {
+                title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
+                image: imgQ2,
+                rank: 'Опытный продавец',
+                price: 200,
+                age: '4-5 лет',
+                brand: 'Zara2',
+                status: 3,
+            },
+        ],
     }
 };
 
