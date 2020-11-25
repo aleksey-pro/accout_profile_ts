@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { getUser } from '../api';
-import { UserContext, initUser } from '../reducer';
-import Tabs from './Tabs';
-import Tab from './Tabs/Tab';
+import '../../styles/my_account.scss';
 
-import About from './ProfileBlocks/About/index';
-import Ads from './ProfileBlocks/Ads';
-import Testimonials from './ProfileBlocks/Testimonials';
-import Favorites from './ProfileBlocks/Favorites';
+import { getUser } from '../../api';
+import { initUser } from '../../reducer';
+import { UserContext } from '../../store';
+import Tabs from '../Tabs';
+import Tab from '../Tabs/Tab';
+
+import About from './Blocks/About/index';
+import Ads from './Blocks/Ads';
+import Testimonials from './Blocks/Testimonials';
+import Favorites from './Blocks/Favorites';
 import AccountHeader from './AccountHeader';
 import AccountInfo from './AccountInfo';
-import MostViewed from './MostViewed';
-import MobileApp from './MobileApp';
-import Modal from '../Modals';
-import ChangeAvatar from '../Modals/ChangeAvatar';
+import MostViewed from '../MostViewed';
+import MobileApp from '../MobileApp';
+import Modal from '../../Modals';
+import ChangeAvatar from '../../Modals/ChangeAvatar';
 
 export default function Profile () {
     const { dispatch } = useContext(UserContext);

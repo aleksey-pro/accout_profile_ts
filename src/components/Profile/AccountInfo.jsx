@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 
-import imgUser from '../assets/img/user.png';
-import imgFacebook from '../assets/img/facebook.svg';
-import imgGoogle from '../assets/img/google.svg';
-import imgCalendar from '../assets/img/calendar.png';
-import imgMessage from '../assets/img/message.svg';
-import { UserContext } from '../reducer';
+import imgUser from '../../assets/img/user.png';
+import imgFacebook from '../../assets/img/facebook.svg';
+import imgGoogle from '../../assets/img/google.svg';
+import imgCalendar from '../../assets/img/calendar.png';
+import imgMessage from '../../assets/img/message.svg';
+import { UserContext } from '../../store';
  
 export default function AccountInfo ({ setModalOpen }) {
     const { store: { user = {} } } = useContext(UserContext);

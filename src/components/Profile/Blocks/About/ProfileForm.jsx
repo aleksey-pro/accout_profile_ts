@@ -1,14 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { updateUser } from '../../../api';
-import { UserContext, setUser } from '../../../reducer';
+import { updateUser } from '../../../../api';
+import { setUser } from '../../../../reducer';
+import { UserContext } from '../../../../store';
 
-import Input from '../../FormElements/Input';
-import Phone from '../../FormElements/Phone';
-import Textarea from '../../FormElements/Textarea';
-import imgFacebook from '../../../assets/img/facebook.svg';
-import imgGoogle from '../../../assets/img/google.svg';
+import Input from '../../../FormElements/Input';
+import Phone from '../../../FormElements/Phone';
+import Textarea from '../../../FormElements/Textarea';
+import imgFacebook from '../../../../assets/img/facebook.svg';
+import imgGoogle from '../../../../assets/img/google.svg';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()

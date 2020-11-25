@@ -1,0 +1,687 @@
+@import "./base-reset";
+@import "./components/";
+
+.my-account {
+    font-family: 'museo300', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    margin-top: 116px;
+
+    .container {
+        max-width: 1140px;
+
+        @media (max-width: 1180px) {
+            padding: 0 20px;
+        }
+    }
+
+    .account-header {
+        padding: 26px 0;
+    }
+    
+    .accordion_item #notifications {
+        table {
+            width: 50%;
+            @media screen and (max-width: 990px) {
+                width: 90%;
+                margin: 20px auto;
+            }
+            tr {
+                height: 40px;
+                td {
+                    .checkbox {
+                        display: flex;
+                        justify-content: center;
+                    }                    
+                }
+                td:nth-child(1) {
+                    font-size: 14px;
+                    width: 65%;
+                }
+            }
+        }
+        div {
+            @media screen and (max-width: 990px) {
+                padding: 0 5%;
+                width: 100%;
+            }
+            button {
+                @media screen and (max-width: 990px) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .tabs-box {
+        display: inline-block;
+        position: relative;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        .tab-box {
+            border-top: 1px solid #eaeaf7;
+            border-bottom: 1px solid #eaeaf7;
+            @media screen and (max-width: 990px) {
+                display: none;
+            }
+            ul.tabs {
+                display: flex;
+                align-items: center;
+                height: 50px;
+
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    height: 50px;
+                    padding-right: 50px;
+                    color: #000;
+                    cursor: pointer;
+                    &.active {
+                        color: #4735f1;
+                    }
+                }
+            }
+        }
+        .tab_container {
+            position: relative;            
+            display: flex;
+            flex-direction: column;
+
+            .accordion_item {
+                padding: 50px 0 100px 0;
+            }
+
+            @media screen and (max-width: 990px) {
+                padding:0;
+            }
+            .password-container {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                @media screen and (max-width: 990px) {
+                    width: 100%;
+                    margin-bottom: 20px;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column-reverse;
+                }
+                .notice {
+                    width: 28%;
+                    @media screen and (max-width: 990px) {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        margin-left: 5%;
+                    }
+                    >h4 {
+                        margin-bottom: 70px;
+                        color: #000;
+                        font-size: 16px;
+                        font-family: 'museo500', sans-serif;
+                        @media screen and (max-width: 990px) {
+                            margin: 18px 0;
+                        }
+                    }
+                    >.checkbox {
+                        margin: 20px 0;
+                        @media screen and (max-width: 990px) {
+                            margin: 8px 0;
+                        }
+                        label {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                .change-password {
+                    width: 30%;
+                    >h4 {
+                        margin-bottom: 70px;
+                        @media screen and (max-width: 990px) {
+                            width: 95%;
+                            margin: 35px 0;
+                            margin-left: 2.5%;
+                        }
+                    }
+                    >form {
+                        @media screen and (max-width: 990px) {
+                            width: 95%;
+                            margin-left: 2.5%;
+                        }
+                    }
+                    .input-label {
+                        margin-bottom: 15px;
+                        @media screen and (max-width: 990px) {
+                            margin-bottom: 15px;
+                        }
+                        input[type=text] {
+                            padding: 7px 50px 7px 7px;
+                        }
+                    }
+                    .change-img {
+                        position: absolute;
+                        top: auto;
+                        left: auto;
+                        bottom: 0;
+                        right: 20px;
+                        background: none;
+                        border: none;
+                        transform: translateY(-50%);
+                    }
+                    form>input[type=submit] {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-top: 35px;
+                        height: 45px;
+                        color: #fff;
+                        font-size: 16px;
+                        font-family: 'museo300', sans-serif;
+                        font-weight: 400;
+                        padding: 0 24px;
+                        border-radius: 7px;
+                        background-color: #6354f4;
+                        border: none;
+                        @media screen and (max-width: 990px) {
+                            display: flex;
+                            width: 100%;
+                            margin: 25px 0;
+                        }
+                        &:hover {
+                            box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
+                            background: #fff;
+                            color: #6354f4;
+                        }
+                    }
+                    @media screen and (max-width: 990px) {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        border-bottom: 1px solid #eaeaf7;
+                    }
+                }
+            }
+
+            .address-container {
+                position: relative;
+                display: flex;
+                align-items: flex-start;
+                width: 100%;
+                @media screen and (max-width: 990px) {
+                    padding: 50px 0 50px 0;
+                    display: flex;
+                    flex-direction: column;
+                }
+                .left-section {
+                    width: 23%;
+                    @media screen and (max-width: 990px) {
+                        width: 100%;
+                        padding: 0 20px;
+                    }
+                    .user-info {
+                        margin-bottom: 11%;
+                        border-bottom: 1px solid #eaeaf7;
+                        >p:nth-child(1) {
+                            margin-bottom: 13%;
+                            font-size: initial; 
+                            @media screen and (max-width: 990px) {
+                                margin-bottom: 2%;
+                            }
+                            @media screen and (max-width: 380px) {
+                                margin-bottom: 3%;
+                            }
+                        }
+                        >p {
+                            margin-bottom: 2px;
+                            font-size: 12px;
+                        }
+                        >.checkbox {
+                            margin: 20px 0;
+                            label {
+                                font-size: 12px;
+                            }
+                        }
+                        .btn-ref {
+                            >button {
+                                color: #9fa4a9;
+                                font-family: 'museo300', sans-serif;
+                                font-size: 12px;
+                                font-weight: 400;
+                                display: flex;
+                                margin-bottom: 3%;
+                                margin-left: -5px;
+                            }
+                            @media screen and (max-width: 990px) {
+                                display: flex;
+                                justify-content: space-between; 
+                            }
+                        }
+                    }
+                    .btn-new-address {
+                        display: none;
+                        @media screen and (max-width: 990px) {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin-top: 35px;
+                            height: 45px;
+                            width: 100%;
+                            color: #fff;
+                            font-size: 16px;
+                            font-family: 'museo300', sans-serif;
+                            font-weight: 400;
+                            padding: 0 24px;
+                            border-radius: 7px;
+                            background-color: #6354f4;
+                            border: none;
+                            &:hover {
+                                box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
+                                background: #fff;
+                                color: #6354f4;
+                            } 
+                        }
+                    }
+                }                
+            }
+            @media screen and (max-width: 990px) {
+                .d_active {
+                    // color: #4735f1;
+                    // background: #fafbff;
+                    border: 1px solid #eaeaf7;
+                    &.tab_accordion:after {
+                        background: #6752f8;
+                        color: #fff;
+                        transform: translateY(-50%) rotate(90deg);
+                    }
+                }
+            }
+            .tab_accordion {
+                display: none;
+                @media screen and (max-width: 990px) {
+                    position: relative;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 90px;
+                    padding: 0 20px;
+                    font-family: "museo500", sans-serif;
+                    font-size: 16px;
+                    border: 1px solid #eaeaf7;
+                    &:after {
+                        content: "\2039";
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: absolute;
+                        top: 50%;
+                        left: auto;
+                        right: 20px;
+                        width: 30px;
+                        height: 30px;
+                        border: 1px solid #eaeaf7;
+                        background: #fafbff;
+                        border-radius: 50%;
+                        font-size: 18px;
+                        font-weight: 700;
+                        color: #000;
+                        transform: translateY(-50%) rotate(-90deg);
+                    }
+                }
+            }
+            .tab_content {
+                // display: none;
+            }
+        }
+        .right-section {
+            width: 70%;
+            margin-left: 5%;
+            @media screen and (max-width: 990px) {
+                width: 100%;
+                margin: 0;
+                padding: 0 20px;
+                display: none;
+            }
+
+            .add-address-close, .red-address {
+                display: none;
+                @media screen and (max-width: 990px) {
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid #eaeaf7;
+                    margin-bottom: 7%;
+                    .btn-close {
+                        margin-bottom: 7%;
+                        color: #9fa4a9;
+                        font-family: 'museo300', sans-serif;
+                        font-size: 12px;
+                        font-weight: 400;
+                    }
+                }                
+            }
+
+            .section {
+                margin-bottom: 3%;
+                @media screen and (max-width: 990px) {
+                    margin-bottom: 5%;
+                }
+                .input-label {
+                    width: 45%;
+                    @media screen and (max-width: 990px) {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .add-address {
+                margin-bottom: 5%;
+            }
+
+            .forms {
+                display: flex;
+                width: 100%;
+                @media screen and (max-width: 990px) {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .input-label {
+                    margin: 0 5% 20px 0;
+                }
+            }
+
+            .btn-dark {
+                border: none;
+                width: 28%;
+                @media screen and (max-width: 990px) {
+                    width: 100%;
+                }
+            }
+            .checkbox {
+                margin-bottom: 7%;
+            }
+        }       
+    }
+
+    // .cards-content {
+    //     position: relative;
+    //     padding: 50px 0;
+    //     .container {
+    //         @media (max-width: 990px) {
+    //             .container-user-card {
+    //                 .user-card {
+    //                     margin: 5% 0;
+    //                     border-bottom: 1px solid #eaeaf7;
+
+    //                     >p {
+    //                         margin-bottom: 5%;
+    //                     }
+
+    //                     .checkbox {
+    //                         margin-bottom: 2%;
+    //                     }
+
+    //                     .btn-ref {
+    //                         >button {
+    //                             color: #9fa4a9;
+    //                             font-family: 'museo300', sans-serif;
+    //                             font-size: 12px;
+    //                             font-weight: 400;
+    //                             display: flex;
+    //                             margin: 30px 0;
+    //                             margin-left: -8px;
+    //                         }
+
+    //                         >button:nth-child(2) {
+    //                             margin-bottom: 25px;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 .button {
+    //                     width: 100%;
+    //                     border-bottom: 1px solid #eaeaf7;
+
+    //                     .btn-new-card {
+    //                         display: flex;
+    //                         justify-content: center;
+    //                         align-items: center;
+    //                         height: 45px;
+    //                         width: 100%;
+    //                         color: #fff;
+    //                         font-size: 16px;
+    //                         font-family: 'museo300', sans-serif;
+    //                         font-weight: 400;
+    //                         padding: 0 24px;
+    //                         border-radius: 7px;
+    //                         background-color: #6354f4;
+    //                         border: none;
+    //                         margin: 5% 0 10% 0;
+
+    //                         &:hover {
+    //                             box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
+    //                             background: #fff;
+    //                             color: #6354f4;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 .right-part {
+    //                     display: flex;
+    //                     justify-content: center;
+    //                     flex-direction: column;
+
+    //                     >h4 {
+    //                         display: flex;
+    //                         justify-content: center;
+    //                         margin-top: 5%;
+    //                     }
+
+    //                     >input[type=submit] {
+    //                         display: flex;
+    //                         justify-content: center;
+    //                         align-items: center;
+    //                         height: 45px;
+    //                         width: 100%;
+    //                         font-size: 16px;
+    //                         font-family: 'museo300', sans-serif;
+    //                         font-weight: 400;
+    //                         padding: 0 24px;
+    //                         border-radius: 7px;
+    //                         background: #fff;
+    //                         color: #6354f4;
+    //                         border: 1px solid #6354f4;
+
+    //                         &:hover {
+    //                             box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
+    //                             color: #6354f4;
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //             .container-add-card {
+    //                 .center-add-card-up {
+    //                     display: flex;
+    //                     justify-content: space-between;
+    //                     border-bottom: 1px solid #eaeaf7;
+                        
+    //                     .btn-close {
+    //                         padding: 0;
+    //                         color: #9fa4a9;
+    //                         font-family: 'museo300', sans-serif;
+    //                         font-size: 12px;
+    //                         font-weight: 400;
+    //                         margin: 40px 0 26px 0;
+    //                     }
+    //                 }
+    //                 >form {
+    //                     margin: 3% 0;
+    //                     .input-label {
+    //                         >input {
+    //                             margin-bottom: 2%; 
+    //                         }
+    //                     }
+    //                 } 
+    //                 .center-forms {
+    //                     width: 100%;
+    //                     display: flex;                        
+    //                     justify-content: space-between;
+    //                     margin-bottom: 5%;
+    //                     >form {
+    //                         .input-label {
+    //                             width: 100%;
+    //                         }
+    //                     }
+    //                     >form:nth-child(1) {
+    //                         margin-right: 5%;
+    //                     }
+    //                     >form:nth-child(2) {
+    //                         margin-left: 5%;
+    //                     }
+    //                 }
+    //                 .checkbox {
+    //                     margin: 5% 0;
+    //                 } 
+    //                 input[type=submit] {
+    //                     display: flex;
+    //                     justify-content: center;
+    //                     align-items: center;
+    //                     height: 45px;
+    //                     width: 100%;
+    //                     color: #fff;
+    //                     font-size: 16px;
+    //                     font-family: 'museo300', sans-serif;
+    //                     font-weight: 400;
+    //                     margin: 6% 0;
+    //                     padding: 0 24px;
+    //                     border-radius: 7px;
+    //                     background-color: #6354f4;
+    //                     border: none;
+    //                     &:hover {
+    //                         box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
+    //                         background: #fff;
+    //                         color: #6354f4;
+    //                     } 
+    //                 }                                  
+    //             }                
+    //         }
+    //         .cards-container {
+    //             height: 70vh;
+    //             width: 100%;
+    //             display: flex;
+    //             .left-section {
+    //                 >h4 {
+    //                     margin-bottom: 70px;
+    //                 }
+    //                 .user-card {
+    //                     margin-bottom: 11%;
+    //                     border-bottom: 1px solid #eaeaf7;
+
+    //                     &>p:nth-child(1) {
+    //                         margin-bottom: 10px;
+    //                         font-size: initial;
+    //                     }
+
+    //                     .checkbox {
+    //                         margin: 20px 0;
+    //                     }
+
+    //                     .btn-ref {
+    //                         >button {
+    //                             color: #9fa4a9;
+    //                             font-family: 'museo300', sans-serif;
+    //                             font-size: 12px;
+    //                             font-weight: 400;
+    //                             display: flex;
+    //                             margin-bottom: 30px;
+    //                             margin-left: -8px;
+    //                         }
+
+    //                         >button:nth-child(2) {
+    //                             margin-bottom: 25px;
+    //                         }
+    //                     }
+    //                 }                    
+    //             }
+    //             .center-section {
+    //                 width: 30%;
+    //                 margin-left: 5%;
+    //                 &>h4 {
+    //                     margin-bottom: 70px;
+    //                 }
+    //                 >form {
+    //                     .input-label {
+    //                         margin-bottom: 20px;
+    //                     }
+    //                 }
+    //                 .center-forms {
+    //                     display: flex;
+    //                     margin-bottom: 5%;
+    //                     >form {
+    //                         .input-label {
+    //                             margin-bottom: 20px;
+    //                         }
+    //                     }
+    //                     >form:nth-child(1) {
+    //                         margin-right: 5%;
+    //                     }
+    //                     >form:nth-child(2) {
+    //                         margin-left: 5%;
+    //                     }
+    //                 }
+    //                 >label:nth-child(n) {
+    //                     margin: 20px 0;
+    //                 }
+    //                 >input[type=submit] {
+    //                     display: flex;
+    //                     justify-content: center;
+    //                     align-items: center;
+    //                     margin-top: 35px;
+    //                     height: 45px;
+    //                     color: #fff;
+    //                     font-size: 16px;
+    //                     font-family: 'museo300', sans-serif;
+    //                     font-weight: 400;
+    //                     padding: 0 24px;
+    //                     border-radius: 7px;
+    //                     background-color: #6354f4;
+    //                     border: none;
+    //                     &:hover {
+    //                         box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
+    //                         background: #fff;
+    //                         color: #6354f4;
+    //                     }
+    //                 }
+    //             }
+    //             .right-part {
+    //                 margin-left: 21%;
+    //                 width: 27%;
+    //                 >h4 {
+    //                     margin-bottom: 81px;
+    //                 }
+    //                 >input[type=submit] {
+    //                     display: flex;
+    //                     justify-content: center;
+    //                     align-items: center;
+    //                     height: 45px;
+    //                     width: 100%;
+    //                     font-size: 16px;
+    //                     font-family: 'museo300', sans-serif;
+    //                     font-weight: 400;
+    //                     padding: 0 24px;
+    //                     border-radius: 7px;
+    //                     background: #fff;
+    //                     color: #6354f4;
+    //                     border: 1px solid #6354f4;
+    //                     &:hover {
+    //                         box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
+    //                         color: #6354f4;
+    //                     }
+    //                 }
+    //             }                    
+    //         }
+    //     }
+    // }
+}

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { UserContext } from '../../reducer';
-import { getItemsFiltered } from '../../utils';
+import { UserContext } from '../../../store';
+import { getItemsFiltered } from '../../../utils';
+import imgQ2 from '../../../assets/img/q2.png';
 
 const statusMap = [
     { title: 'Все', status: 0 },
@@ -9,22 +10,18 @@ const statusMap = [
     { title: 'Продано', status: 3 },
 ];
 
-export default function Ads () {
-    const { store: { user: { products = [] } = {} } } = useContext(UserContext);
-    const items = getItemsFiltered(statusMap, products);
+export default function Favorites () {
+    const { store: { user: { favourites = [] } = {} } } = useContext(UserContext);
+    const items = getItemsFiltered(statusMap, favourites);
     const [filter, setFilter] = useState(0);
     const handleClick = (f) => setFilter(f);
 
-    return <div className="accordion_item">
-        <h3 className="tab_accordion">Мои объявления</h3>
-        <div className="tab_content">
+    return  <div className="accordion_item favorite">
+        <h3 className="tab_accordion" rel="favorite">Избранное</h3>
+        <div id="favorite" className="tab_content">
             <div className="container">
                 <div className="ad-container">
                     <ul className="tab-nav">
-                        <li><a href={`${process.env.API_URL}/create-product`} className="btn-dark">
-                                Подать объявление
-                            </a>
-                        </li>
                         {statusMap.map((v, i) => <li key={i}>
                             <button className="nav-item active" onClick={() => handleClick(v.status)}>{v.title}</button>
                             <span className="quantity">{items[v.status].length}</span>
@@ -37,7 +34,7 @@ export default function Ads () {
                                 <div className="img-container">
                                     <div className="img-wrapper">
                                         <div className="seller-rank">{rank}</div>
-                                        <img src={image} alt=''/>
+                                        <img src={image || imgQ2} alt=''/>
                                     </div>
                                 </div>
                                 <div className="product-description">

@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 
-import { UserContext } from '../../reducer';
-import imgUser from '../../assets/img/user.png';
-import imgLike from '../../assets/img/like_filled.svg';
-import { getItemsFiltered } from '../../utils';
+import { UserContext } from '../../../store';
+import imgUser from '../../../assets/img/user.png';
+import imgLike from '../../../assets/img/like_filled.svg';
+import { getItemsFiltered } from '../../../utils';
 
 const statusMap = [
     { title: 'Все', status: 0 },

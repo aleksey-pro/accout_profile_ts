@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { updateUser } from '../api';
-import { UserContext, setUser } from '../reducer';
+import { setUser } from '../reducer';
+import { UserContext } from '../store';
 
 import Upload from '../components/FormElements/Upload';
 import imgUser from '../assets/img/user.png';
