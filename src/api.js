@@ -11,3 +11,7 @@ export const getUser = () => instance.get('/get_user')
 export const updateUser = (formData) => instance.post('/update_user', formData)
     .then(res => res.data)
     .catch(err => console.log(err));
+
+export const updatePassword = (data) => instance.post('/update_password', data)
+    .then(res => res.data)
+    .catch(err => console.log(err));

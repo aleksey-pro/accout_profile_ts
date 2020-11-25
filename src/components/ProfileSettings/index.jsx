@@ -4,7 +4,7 @@ import '../../styles/profile_custom.scss';
 import Tabs from '../Tabs';
 import Tab from '../Tabs/Tab';
 import AccountHeader from './AccountHeader';
-import Password from './Blocks/Password';
+import Password from './Blocks/Password/index';
 import Notificitaions from './Blocks/Notificitaions';
 
 export default function ProfileSettings () {
