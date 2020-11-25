@@ -41,7 +41,7 @@ export default function Profile () {
             </Tab>
         </Tabs>
         <MostViewed />        
-        {/* <MobileApp />        */}
+        <MobileApp />       
         <Modal isModalOpen={isModalOpen} setModalIsOpen={setModalIsOpen}>
             <ChangeAvatar />
         </Modal>
