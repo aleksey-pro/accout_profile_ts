@@ -79,6 +79,7 @@ export const initialState = {
                 status: 3,
             },
         ],
+        notifications: {}
     }
 };
 export const Store = ({children}) => {

@@ -5,7 +5,7 @@ import Tabs from '../Tabs';
 import Tab from '../Tabs/Tab';
 import AccountHeader from './AccountHeader';
 import Password from './Blocks/Password/index';
-import Notificitaions from './Blocks/Notificitaions';
+import Notificitaions from './Blocks/Notificitaions/index';
 
 export default function ProfileSettings () {
     return <div className="my-account">

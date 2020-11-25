@@ -8,7 +8,7 @@ export const getUser = () => instance.get('/get_user')
     .then(res => res.data)
     .catch(err => console.log(err));
 
-export const updateUser = (formData) => instance.post('/update_user', formData)
+export const updateUser = (data) => instance.post('/update_user', data)
     .then(res => res.data)
     .catch(err => console.log(err));
 
