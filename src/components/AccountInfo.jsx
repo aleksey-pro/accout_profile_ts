@@ -9,7 +9,7 @@ import { UserContext } from '../reducer';
  
 export default function AccountInfo ({ setModalOpen }) {
     const { store: { user = {} } } = useContext(UserContext);
-    const { avatar, name, surname, city, socialAccountUrl } = user;
+    const { avatar, name, surname, city, about, socialAccountUrl, timeOnSite, timeForResponse } = user;
     const userAvatar = avatar || imgUser;
     return <section className="main-account-info">
         <div className="container">
@@ -46,16 +46,13 @@ export default function AccountInfo ({ setModalOpen }) {
                 <div className="stats">
                     <div className="stat-item">
                         <img src={imgCalendar} alt=''/>
-                        На сайте 332 дня</div>
+                        На сайте {timeOnSite} дня</div>
                     <div className="stat-item">
                         <img src={imgMessage} alt=''/>
-                        Обычно вы отвечаете в течение 2 часов
+                        Обычно вы отвечаете в течение {timeForResponse} часов
                     </div>
                 </div>
-                <div className="short-info">
-                    Краткая информация пользователя о себе, обращение к покупателям, любой текст, которым пользователь
-                    захочет поделиться в своем профиле.
-                </div>
+                <div className="short-info">{about}</div>
             </div>
         </div>
     </section>

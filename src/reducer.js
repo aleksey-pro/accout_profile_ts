@@ -12,7 +12,9 @@ export const initialState = {
         phone: '',
         city: 'Кропивницкий',
         socialAccountUrl: '',
-        about: 'some info about...',
+        timeOnSite: 332,
+        timeForResponse: 2,
+        about: 'Краткая информация пользователя о себе, обращение к покупателям, любой текст, которым пользователь захочет поделиться в своем профиле.',
         products: [
             {
                 title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
