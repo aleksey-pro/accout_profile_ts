@@ -55,48 +55,50 @@ export default function ChangeAvatar ({ setModalIsOpen, modalIsOpen }) {
         }
     }, [preview]);
     
-    return  <div id="modal-change-avatar" className="modal-frame">
-        <div className="content">
-            <div className="avatar-wrap upload-avatar">
-                <div className="container">
-                    <div>
-                        {/* <div className="upload-msg">
+    return (
+        <div id="modal-change-avatar" className="modal-frame">
+            <div className="content">
+                <div className="avatar-wrap upload-avatar">
+                    <div className="container">
+                        <div>
+                            {/* <div className="upload-msg">
                             <img src={mobileAppIcon} alt="gaevy" className="avatar" />
                         </div> */}
-                        <div className="upload-avatar-wrap">
-                            <div id="upload-avatar">
-                                <img src={preview || imgUser} alt="" />
+                            <div className="upload-avatar-wrap">
+                                <div id="upload-avatar">
+                                    <img src={preview || imgUser} alt="" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="modal-actions">
-                        <div className="actions">
-                            <Upload 
-                                title="Завантажити" 
-                                name="avatar" 
-                                setPreview={setPreview}
-                                onChange={(file) => setFile({ avatar: file })}
-                            />
-                            <button className="upload-result btn-dark">Сохранить</button>
-                            <div className="block_btn__rotation">
-                                <button className="avatar-rotate"
-                                    data-deg="-90">
-                                    <img src={replayArrowLeft} alt='' />
-                                </button>
-                                <button className="avatar-rotate"
-                                    data-deg="90">
-                                    <img src={replayArrowRight} alt='' />
-                                </button>
-                            </div>                            
+                        <div className="modal-actions">
+                            <div className="actions">
+                                <Upload
+                                    title="Завантажити"
+                                    name="avatar"
+                                    setPreview={setPreview}
+                                    onChange={(file) => setFile({ avatar: file })}
+                                />
+                                <button className="upload-result btn-dark">Сохранить</button>
+                                <div className="block_btn__rotation">
+                                    <button className="avatar-rotate"
+                                        data-deg="-90">
+                                        <img src={replayArrowLeft} alt='' />
+                                    </button>
+                                    <button className="avatar-rotate"
+                                        data-deg="90">
+                                        <img src={replayArrowRight} alt='' />
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+                        <button className="modal-change-close" onClick={() => setModalIsOpen(false)}>
+                            <img src={imgClose} alt='' />
+                        </button>
+                        {error &&
+                            <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
                     </div>
-                    <button className="modal-change-close" onClick={() => setModalIsOpen(false)}>
-                        <img src={imgClose} alt='' />
-                    </button>
-                    {error && 
-                    <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
                 </div>
             </div>
         </div>
-    </div>
+    )
 }
