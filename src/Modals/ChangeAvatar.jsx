@@ -8,6 +8,7 @@ import imgUser from '../assets/img/user.png';
 import imgClose from '../assets/img/close.svg';
 import replayArrowRight from '../assets/img/replay-arrow-right.svg';
 import replayArrowLeft from '../assets/img/replay-arrow-left.svg';
+import loadFotoIcon from '../assets/img/load-photo.svg';
 // import mobileAppIcon from '../assets/img/mobile-app-icon.svg';
 
 const getFormData = (data) => {
@@ -75,10 +76,10 @@ export default function ChangeAvatar ({ setModalIsOpen, modalIsOpen }) {
                                 <Upload
                                     title="Завантажити"
                                     name="avatar"
+                                    icon={loadFotoIcon}
                                     setPreview={setPreview}
                                     onChange={(file) => setFile({ avatar: file })}
                                 />
-                                <button className="upload-result btn-dark">Сохранить</button>
                                 <div className="block_btn__rotation">
                                     <button className="avatar-rotate"
                                         data-deg="-90">

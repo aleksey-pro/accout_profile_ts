@@ -56,6 +56,18 @@ input[type="file"] {
       width: 100%;
       margin-top: 10px;
     }
+    .actions {
+      .btn-load {
+        cursor: pointer;
+        label {
+          padding: 0 12px;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+    }
   }
   .block_btn__rotation {
     display: flex;

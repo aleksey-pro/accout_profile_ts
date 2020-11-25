@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 const ImageLoader = (value) => new Promise((resolve) => {
 	if (value instanceof File) {
 		const reader = new FileReader();
@@ -12,7 +13,7 @@ const ImageLoader = (value) => new Promise((resolve) => {
 	}
 });
 
-export default function Upload({ setPreview, onChange, title, name }) {
+export default function Upload({ setPreview, onChange, title, name, icon }) {
     const [image, setImage] = useState();
     useEffect(() => {
 		ImageLoader(image).then((data) => {
@@ -34,6 +35,7 @@ export default function Upload({ setPreview, onChange, title, name }) {
                 onChange={onChangeHandler}
             />
             {title && <label htmlFor={`id-${name}`}>
+                <img src={icon} alt=""/>
                 <span>{title}</span>
             </label>}
         </div>
