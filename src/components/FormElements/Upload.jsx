@@ -24,16 +24,18 @@ export default function Upload({ setPreview, onChange, title, name }) {
         setImage(file);
         onChange(file);
 	};
-    return <span href="/" className="btn-load file-btn">
-        <input 
-            type="file" 
-            id={`id-${name}`}  
-            accept="image/*" 
-            name={name} 
-            onChange={onChangeHandler}
-        />
-        {title && <label htmlFor={`id-${name}`}>
-            <span>{title}</span>
-        </label>}
-    </span>;
+    return (
+        <div href="/" className="btn-load btn-light">
+            <input
+                type="file"
+                id={`id-${name}`}
+                accept="image/*"
+                name={name}
+                onChange={onChangeHandler}
+            />
+            {title && <label htmlFor={`id-${name}`}>
+                <span>{title}</span>
+            </label>}
+        </div>
+    );
 }
