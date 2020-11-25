@@ -11,6 +11,10 @@ input[type="file"] {
   position: absolute;
   top: -35px;
   right: -40px;
+  @media screen and (max-width: 768px) {
+    top: 0;
+    right: 0;
+  }
   img {
     width: 20px;
     height: auto;
@@ -45,6 +49,22 @@ input[type="file"] {
   }
   .content {
     display: flex;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+    .avatar-wrap {
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+      .container {
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 44px 0 0 0;
+        }
+      }
+    }
   }
   .modal-actions {
     display: flex;
@@ -52,11 +72,17 @@ input[type="file"] {
     justify-content: center;
     width: 200px;
     margin-left: 55px;
+    @media screen and (max-width: 768px) {
+      margin: 50px 0;
+    }
     .upload-result {
       width: 100%;
       margin-top: 10px;
     }
     .actions {
+      @media screen and (max-width: 768px) {
+        position: relative;
+      }
       .btn-load {
         cursor: pointer;
         label {
@@ -74,5 +100,9 @@ input[type="file"] {
     position: absolute;
     top: -35px;
     left: 60px;
+    @media screen and (max-width: 768px) {
+      top: -290px;
+      left: 63px;
+    }
   }
 }
