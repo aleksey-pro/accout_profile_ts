@@ -781,14 +781,17 @@
             border: 2px solid white;
             margin: 65px 0 0 -25px;
 
-            &.like {
-              // content: url("../../img/like_filled.svg");
+            img {
+              width: 100%;
+              height: 100%;
+            }
+
+            &.like img{
               background: #00ad61;
               padding: 4px;
             }
 
-            &.unlike {
-              // content: url("../../img/like_filled.svg");
+            &.unlike img{
               background: #f771a2;
               padding: 4px;
               transform: rotate(180deg);

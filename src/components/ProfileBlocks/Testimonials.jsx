@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import { UserContext } from '../../reducer';
 import imgUser from '../../assets/img/user.png';
+import imgLike from '../../assets/img/like_filled.svg';
 import { getItemsFiltered } from '../../utils';
 
 const statusMap = [
@@ -36,7 +37,9 @@ export default function Testimonials () {
                                     <div className="avatar-name">
                                         <a href="/" className="avatar">
                                             <img src={image || imgUser} alt="" />
-                                            <div className="rating like">{rating}</div>
+                                            <div className={`rating ${rating === 'positive' ? 'like' : 'unlike'}`}
+                                                ><img src={imgLike} alt="" />
+                                            </div>
                                         </a>
                                         <div className="name-place">
                                              <h4>{fullname}</h4>

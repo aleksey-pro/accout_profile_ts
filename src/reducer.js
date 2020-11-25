@@ -45,7 +45,7 @@ export const initialState = {
         testimonials: [
             {
                 image: imgUser,
-                rating: '',
+                rating: 'positive',
                 fullname: 'Ольга Марозова',
                 city: 'г. Кропивницкий',
                 purchased: 'Сарафан зеленый для девочки в горошек новый | 200 грн',
