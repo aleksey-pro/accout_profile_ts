@@ -45,7 +45,7 @@ export default function ProfileForm() {
     }
     return <Formik
         initialValues={user}
-        // validationSchema={validationSchema}
+        validationSchema={validationSchema}
         onSubmit={onSubmit}
     >
         {({values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit}) => {
@@ -59,6 +59,7 @@ export default function ProfileForm() {
                     <Phone 
                         id="telephone" 
                         mask={'+380 (99) 999 99 99'} 
+                        maskChar={' '}
                         type="text" 
                         name="telephone" 
                         placeholder="+380 (99) 000 00 00" 

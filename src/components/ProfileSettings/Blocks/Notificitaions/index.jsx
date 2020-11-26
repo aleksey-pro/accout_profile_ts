@@ -41,7 +41,6 @@ const notifications = [
         title: 'Вы успешно добавили свой первый товар', 
         id1: 'seccessfully-first-product', 
         id2: 'seccessfully-first-product-sms',
-        isChecked: 'val8',
     },
     {
         title: 'Ваш товар добавили в избранное', 
@@ -74,7 +73,7 @@ export default function Notificitaions () {
     return <div className="accordion_item">
         <h3 className="tab_accordion">Настройки уведомлений</h3>
         <div id="notifications" className="tab_content">
-            <NotificationForm notificationFileds={notifications}/>
+            <NotificationForm notificationFields={notifications}/>
         </div>
     </div>
 }

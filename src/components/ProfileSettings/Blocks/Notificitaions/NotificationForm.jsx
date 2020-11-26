@@ -5,7 +5,7 @@ import { setUser } from '../../../../reducer';
 import { UserContext } from '../../../../store';
 import NotificationField from './NotificationField';
 
-export default function NotificationForm({ notificationFileds }) {
+export default function NotificationForm({ notificationFields }) {
     const { store: { user: { notifications } }, dispatch } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -41,14 +41,14 @@ export default function NotificationForm({ notificationFileds }) {
                             {({
                                 form: { values },
                                 ...fieldArrayHelpers
-                            }) => notificationFileds && notificationFileds.length > 0 &&
-                                notificationFileds.map((n, i) => <NotificationField 
+                            }) => notificationFields && notificationFields.length > 0 &&
+                                notificationFields.map((n, i) => <NotificationField 
                                     values={values}
                                     name="notifications" 
                                     title={n.title} 
                                     id1={n.id1} 
                                     id2={n.id2} 
-                                    index={i} 
+                                    key={i}
                                     arrayHelpers={fieldArrayHelpers}/>
                             )}
                         </FieldArray>

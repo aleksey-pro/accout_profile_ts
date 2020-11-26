@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: `${process.env}/api`
+    baseURL: `${process.env.API_URL}/api`
 });
 
 export const getUser = () => instance.get('/get_user')

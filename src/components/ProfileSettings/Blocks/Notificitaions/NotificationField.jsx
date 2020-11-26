@@ -1,9 +1,9 @@
 import React from 'react';
 import Checkbox from '../../../FormElements/Checkbox';
 export default function NotificationField ({ 
-    title, id1, id2, index, name, values, arrayHelpers,
+    title, id1, id2, name, values, arrayHelpers,
 }) {
-    return <tr key={index}>
+    return <tr>
         <td>{title}</td>
         <td>
             <Checkbox 

@@ -11,7 +11,7 @@ export default function Phone (props) {
 
     return <div className={"input-label " + name}>
         {title && <label htmlFor={id}>{title}</label>}
-        <ReactInputMask {...props} {...field}/>
+        <ReactInputMask {...props} {...field} />
         {error && touched && <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
     </div>
 };
