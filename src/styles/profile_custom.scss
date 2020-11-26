@@ -170,7 +170,11 @@
                         right: 20px;
                         background: none;
                         border: none;
-                        transform: translateY(-50%);
+                        transform: translateY(-60%);
+
+                        &.error {
+                            transform: translateY(-180%); 
+                        }
                     }
                     form>button[type=submit] {
                         display: flex;

@@ -53,7 +53,7 @@ export default function Ads () {
                                     </div>
                                 </div>
                             </a>
-                        })};
+                        })}
                     </div>
                 </div>
             </div>

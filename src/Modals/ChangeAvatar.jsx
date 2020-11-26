@@ -10,7 +10,6 @@ import imgClose from '../assets/img/close.svg';
 import replayArrowRight from '../assets/img/replay-arrow-right.svg';
 import replayArrowLeft from '../assets/img/replay-arrow-left.svg';
 import loadFotoIcon from '../assets/img/load-photo.svg';
-// import mobileAppIcon from '../assets/img/mobile-app-icon.svg';
 
 const getFormData = (data) => {
 	const formData = new FormData();
