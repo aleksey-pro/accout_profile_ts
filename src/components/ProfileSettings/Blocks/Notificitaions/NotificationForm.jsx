@@ -1,14 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Formik, Form, FieldArray } from 'formik';
-import * as Yup from 'yup';
 import { updateUser } from '../../../../api';
 import { setUser } from '../../../../reducer';
 import { UserContext } from '../../../../store';
 import NotificationField from './NotificationField';
 
-export default function NotificationForm({ notificitaionsState }) {
-    const { notifications } = notificitaionsState;
-    const { store: { user }, dispatch } = useContext(UserContext);
+export default function NotificationForm({ notificationFileds }) {
+    const { store: { user: { notifications } }, dispatch } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const responseHandler = (response) => {
@@ -20,18 +18,15 @@ export default function NotificationForm({ notificitaionsState }) {
         setLoading(false);
     }
     const onSubmit = (values) => {
-        // console.log("🚀 ~ file: NotificationForm.jsx ~ line 29 ~ onSubmit ~ values", values)
-        // const cleanValues = {...values};
-        // delete cleanValues.notifications;
-        // setLoading(true);
-        // updateUser(cleanValues)
-        //     .then(responseHandler)
-        //     .catch(() => setLoading(false))
+        setLoading(true);
+        updateUser(values)
+            .then(responseHandler)
+            .catch(() => setLoading(false))
     }
     return <Formik
         initialValues={{ notifications }}
-        onSubmit={onSubmit}
-        render={({ handleSubmit }) => (
+        onSubmit={onSubmit}>
+        {({ handleSubmit, touched }) => (
             <Form onSubmit={handleSubmit}>
                 <table>
                     <thead>
@@ -44,19 +39,27 @@ export default function NotificationForm({ notificitaionsState }) {
                     <tbody>
                         <FieldArray name="notifications">
                             {({
-                                form: { values, setValues, validateForm },
+                                form: { values },
                                 ...fieldArrayHelpers
-                            }) => values.notifications && values.notifications.length > 0 &&
-                                    values.notifications.map((n, i) => <NotificationField 
-                                        name="checked" title={n.title} id1={n.id1} id2={n.id2} index={i} />
+                            }) => notificationFileds && notificationFileds.length > 0 &&
+                                notificationFileds.map((n, i) => <NotificationField 
+                                    values={values}
+                                    name="notifications" 
+                                    title={n.title} 
+                                    id1={n.id1} 
+                                    id2={n.id2} 
+                                    index={i} 
+                                    arrayHelpers={fieldArrayHelpers}/>
                             )}
                         </FieldArray>
                     </tbody>
                 </table>
                 <div>
-                    <button type="submit" className="btn-dark">Сохранить</button>
+                    {error && Object.keys(touched).length === 0 &&
+                    <div className="msg_err__container"><span className="msg_err">{error}</span></div>}
+                    <button type="submit" className="btn-dark" disabled={loading}>Сохранить</button>
                 </div>
             </Form>
         )}
-    />
+    </Formik>
 }

@@ -50,7 +50,7 @@ export default function PasswordForm() {
                 <Input type="text" placeholder="Новый пароль" id="confirmPass" icon={imgHide} name="confirmPass" title="*Подтвердить пароль"/>
                 {message && Object.keys(touched).length === 0 && 
                     <div className="msg_err__container"><span className="msg_err">{message}</span></div>}
-                <button type="submit">Сохранить</button>
+                <button type="submit" disabled={loading}>Сохранить</button>
             </Form>
     }}       
     </Formik>

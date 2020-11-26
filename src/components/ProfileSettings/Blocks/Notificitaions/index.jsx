@@ -1,14 +1,7 @@
 import React from 'react';
 import NotificationForm from './NotificationForm';
 
-const notificitaionsState = {
-    checked: [],
-    notifications: [
-    // { 
-    //     title: 'Нужно подтверждение email-адреса',
-    //     id1: {name: 'need-email', checked: true},
-    //     id2: {name: 'need-email-sms', checked: false},
-    // },
+const notifications = [
     { 
         title: 'Нужно подтверждение email-адреса',
         id1: 'need-email',
@@ -76,13 +69,12 @@ const notificitaionsState = {
         id2: 'new-message-sms',
     },
 ]
-}
 
 export default function Notificitaions () {
     return <div className="accordion_item">
         <h3 className="tab_accordion">Настройки уведомлений</h3>
         <div id="notifications" className="tab_content">
-            <NotificationForm notificitaionsState={notificitaionsState}/>
+            <NotificationForm notificationFileds={notifications}/>
         </div>
     </div>
 }
