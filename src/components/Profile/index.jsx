@@ -9,7 +9,7 @@ import Tab from '../Tabs/Tab';
 
 import About from './Blocks/About/index';
 import Products from './Blocks/Products';
-import Testimonials from './Blocks/Testimonials';
+import Reviews from './Blocks/Reviews';
 import Favorites from './Blocks/Favorites';
 import AccountHeader from './AccountHeader';
 import AccountInfo from './AccountInfo';
@@ -37,7 +37,7 @@ export default function Profile () {
                 <Products />
             </Tab>
             <Tab label='Отзывы' id="tab3">
-                <Testimonials />
+                <Reviews />
             </Tab>
             <Tab label='Избранное' id="tab4">
                 <Favorites />

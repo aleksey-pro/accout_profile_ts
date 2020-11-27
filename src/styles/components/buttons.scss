@@ -22,7 +22,7 @@ button {
   background-color: #6354f4;
   transition: color .2s linear,border-color .2s linear;
 
-  &:hover {
+  &:not([disabled]):hover {
     box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
     background: #fff;
     color: #6354f4;
@@ -45,7 +45,7 @@ button {
   background-color: #6354f4;
   transition: color .2s linear,border-color .2s linear;
 
-  &:hover {
+  &:not([disabled]):hover {
     box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
     background: #fff;
     color: #6354f4;

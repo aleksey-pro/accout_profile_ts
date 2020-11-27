@@ -1,5 +1,4 @@
 .paginator {
-    // position: relative;
     padding: 50px 0 30px;
   
   
@@ -22,6 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 
     button:not(:first-child) {
         margin-left: 20px;
