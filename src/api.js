@@ -8,6 +8,10 @@ export const getUser = () => instance.get('/get_user')
     .then(res => res.data)
     .catch(err => console.log(err));
 
+export const getProducts = (page) => instance.get(`/get_products?page=${page}`)
+    .then(res => res.data)
+    .catch(err => console.log(err));    
+
 export const updateUser = (data) => instance.post('/update_user', data)
     .then(res => res.data)
     .catch(err => console.log(err));

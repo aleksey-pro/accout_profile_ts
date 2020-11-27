@@ -1,0 +1,29 @@
+.paginator {
+    // position: relative;
+    padding: 50px 0 30px;
+  
+  
+    .navButtons {
+      display: flex;
+      justify-content: center;
+  
+      .navButtonsGap {
+        width: 1rem;
+      }
+  
+      &.mobile {
+        display: none;
+      }
+  
+    }
+}
+
+.paginationNav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button:not(:first-child) {
+        margin-left: 20px;
+    }
+}

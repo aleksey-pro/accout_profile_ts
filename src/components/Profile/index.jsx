@@ -8,7 +8,7 @@ import Tabs from '../Tabs';
 import Tab from '../Tabs/Tab';
 
 import About from './Blocks/About/index';
-import Ads from './Blocks/Ads';
+import Products from './Blocks/Products';
 import Testimonials from './Blocks/Testimonials';
 import Favorites from './Blocks/Favorites';
 import AccountHeader from './AccountHeader';
@@ -34,7 +34,7 @@ export default function Profile () {
                 <About />
             </Tab>
             <Tab label='Мои объявления' id="tab2">
-                <Ads />
+                <Products />
             </Tab>
             <Tab label='Отзывы' id="tab3">
                 <Testimonials />

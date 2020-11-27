@@ -5,12 +5,16 @@ export const appReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'INIT_USER':
             return { 
-                user: payload
+                user: payload,
             };
         case 'SET_USER':
             return {
                 ...state.user,
                 payload,           
+            }
+        case 'SET_PRODUCTS':
+            return {
+                products: payload,
             }
         default:
             return state
@@ -29,4 +33,11 @@ export const setUser = (data) => {
 		type: "SET_USER",
 		payload: data,
 	};
+}
+
+export const setProducts = (data) => {
+    return {
+		type: "SET_PRODUCTS",
+		payload: data,
+	};  
 }

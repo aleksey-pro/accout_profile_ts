@@ -29,6 +29,33 @@ button {
   }
 }
 
+.btn-round {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 45px;
+  width: 45px;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'museo300', sans-serif;
+  font-weight: 400;
+  padding: 0 24px;
+  border-radius: 50%;
+  background-color: #6354f4;
+  transition: color .2s linear,border-color .2s linear;
+
+  &:hover {
+    box-shadow: 0 0 14px rgba(120, 138, 183, 0.25);
+    background: #fff;
+    color: #6354f4;
+  }
+
+  &.active {
+    background: green;
+  }
+}
+
 .btn-light {
   display: flex;
   justify-content: center;

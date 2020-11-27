@@ -17,35 +17,6 @@ export const initialState = {
         timeOnSite: 332,
         timeForResponse: 2,
         about: 'Краткая информация пользователя о себе, обращение к покупателям, любой текст, которым пользователь захочет поделиться в своем профиле.',
-        products: [
-            {
-                title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
-                image: imgQ2,
-                rank: 'Опытный продавец',
-                price: 200,
-                age: '4-5 лет',
-                brand: 'Zara1',
-                status: 1,
-            },
-            {
-                title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
-                image: imgQ2,
-                rank: 'Опытный продавец',
-                price: 200,
-                age: '4-5 лет',
-                brand: 'Zara2',
-                status: 1,
-            },
-            {
-                title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
-                image: imgQ2,
-                rank: 'Опытный продавец',
-                price: 200,
-                age: '4-5 лет',
-                brand: 'Zara3',
-                status: 2,
-            },
-        ],
         testimonials: [
             {
                 image: imgUser,
@@ -80,7 +51,52 @@ export const initialState = {
             },
         ],
         notifications: []
-    }
+    },
+    products: {
+        items :
+            [
+                {
+                    title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
+                    image: imgQ2,
+                    rank: 'Опытный продавец',
+                    price: 200,
+                    age: '4-5 лет',
+                    brand: 'Zara1',
+                    status: 1,
+                },
+                {
+                    title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
+                    image: imgQ2,
+                    rank: 'Опытный продавец',
+                    price: 200,
+                    age: '4-5 лет',
+                    brand: 'Zara1',
+                    status: 1,
+                },
+                {
+                    title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
+                    image: imgQ2,
+                    rank: 'Опытный продавец',
+                    price: 200,
+                    age: '4-5 лет',
+                    brand: 'Zara2',
+                    status: 1,
+                },
+                {
+                    title: 'Ботинки (ботиночки) ортопедические фирмы "panda orthopedic" для девочки',
+                    image: imgQ2,
+                    rank: 'Опытный продавец',
+                    price: 200,
+                    age: '4-5 лет',
+                    brand: 'Zara3',
+                    status: 2,
+                },
+            ],
+        currentPage: 1,
+        total: 100,
+        count: 25,
+        pageCount: 4,
+    },
 };
 export const Store = ({children}) => {
     const [store, dispatch] = useReducer(appReducer, initialState);
