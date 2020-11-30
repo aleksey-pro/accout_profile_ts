@@ -34,7 +34,7 @@ const Tabs = ({
 				</ul>
 			</div>
 			{tabs.map((el, i) => (
-				<div className="tab_container" key={i}>
+				<div className="tab_container container" key={i}>
 					{ state.activeTab === el.props.id
 						&& <Fragment>
 							{cloneElement(el, { onChangeTab })}
