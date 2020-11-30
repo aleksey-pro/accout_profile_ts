@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { getItemsFiltered } from '../../../utils';
 import BlockWrapper from './BlockWrapper';
 
@@ -12,11 +12,8 @@ const statusMap = [
 ];
 
 export default function Favorites () {    
-    const [filter, setFilter] = useState(0);
-    const handleSetFilter = (f) => setFilter(f);
     return <BlockWrapper type="favourites">
-        {({ store }) => {
-            const { favourites: { items } } = store;
+        {({ items, filter, handleSetFilter }) => {
             const favoriteItems = getItemsFiltered(statusMap, items);
             return <div className="accordion_item">
                 <h3 className="tab_accordion">Избранное</h3>

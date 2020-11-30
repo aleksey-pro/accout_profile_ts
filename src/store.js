@@ -11,7 +11,7 @@ export const initialState = {
         surname: 'Петренко',
         email: 'mail@natalya.com',
         avatar: '',
-        phone: '',
+        telephone: '+380991234567',
         city: 'Кропивницкий',
         socialAccountUrl: '',
         timeOnSite: 332,

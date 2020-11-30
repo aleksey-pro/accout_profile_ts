@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { getItemsFiltered } from '../../../utils';
 import BlockWrapper from './BlockWrapper';
 
@@ -12,11 +12,8 @@ const statusMap = [
 ];
 
 export default function Reviews () {    
-    const [filter, setFilter] = useState(0);
-    const handleSetFilter = (f) => setFilter(f);
     return <BlockWrapper type="reviews">
-        {({ store }) => {
-            const { reviews: { items } } = store;
+        {({ items, filter, handleSetFilter }) => {
             const reviewItems = getItemsFiltered(statusMap, items);
             return <div className="accordion_item">
                 <h3 className="tab_accordion">Отзывы</h3>

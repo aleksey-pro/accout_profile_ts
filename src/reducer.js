@@ -12,9 +12,11 @@ export const appReducer = (state = initialState, action) => {
                 ...state.user,
                 payload,           
             }
-        case 'SET_PRODUCTS':
+        case 'SET_DATA':
+            const { data, dataType } = payload;
             return {
-                products: payload,
+                ...state,
+                [dataType]: data,
             }
         default:
             return state
@@ -35,9 +37,9 @@ export const setUser = (data) => {
 	};
 }
 
-export const setProducts = (data) => {
+export const setUserData = (data, type) => {
     return {
-		type: "SET_PRODUCTS",
-		payload: data,
-	};  
+		type: "SET_DATA",
+		payload: { data, dataType: type },
+	};
 }

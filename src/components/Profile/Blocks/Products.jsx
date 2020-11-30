@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { getItemsFiltered } from '../../../utils';
 import BlockWrapper from './BlockWrapper';
 
@@ -9,12 +9,9 @@ const statusMap = [
     { title: 'Продано', status: 3 },
 ];
 
-export default function Products () {    
-    const [filter, setFilter] = useState(0);
-    const handleSetFilter = (f) => setFilter(f);
+export default function Products () {
     return <BlockWrapper type="products">
-        {({ store }) => {
-            const { products: { items } } = store;
+        {({ items, filter, handleSetFilter }) => {
             const productItems = getItemsFiltered(statusMap, items);
             return <div className="accordion_item">
                 <h3 className="tab_accordion">Мои объявления</h3>
