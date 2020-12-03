@@ -1,4 +1,11 @@
-Account profile react webpack
+# Account profile
 
-npm run start - dev mode
-npm run build - prod mode
+
+## Description
+
+Личный кабинет пользователя сайта
+
+## Start project
+
+- npm run start - dev mode
+- npm run build - prod mode
