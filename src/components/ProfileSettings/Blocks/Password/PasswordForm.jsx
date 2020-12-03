@@ -7,9 +7,9 @@ import imgHide from '../../../../assets/img/hyde.png';
 
 const validationSchema = Yup.object().shape({
     oldPass: Yup.string()
-        .required('required'),
+        .required('Old password is required'),
     pass: Yup.string()
-        .required('required'),
+        .required('Password is required'),
     confirmPass: Yup.string()
     .oneOf([Yup.ref('pass'), null], "Passwords must match")
         .required('Password confirm is required')                               

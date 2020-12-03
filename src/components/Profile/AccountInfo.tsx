@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 
 import imgUser from '../../assets/img/user.png';
 import imgFacebook from '../../assets/img/facebook.svg';
@@ -7,7 +8,11 @@ import imgCalendar from '../../assets/img/calendar.png';
 import imgMessage from '../../assets/img/message.svg';
 import { UserContext } from '../../store';
  
-export default function AccountInfo ({ setModalOpen }) {
+type AccountInfoType = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const AccountInfo:React.FC<AccountInfoType> = ({ setModalOpen }) => {
     const { store: { user = {} } } = useContext(UserContext);
     const { avatar, name, surname, city, about, socialAccountUrl, timeOnSite, timeForResponse } = user;
     const userAvatar = avatar || imgUser;
@@ -31,8 +36,15 @@ export default function AccountInfo ({ setModalOpen }) {
                     <div className="connect-with">
                         <span>Привязать аккаунт</span>
                         <div className="attachment-social-account">
-                            <a href={`${process.env.API_URL}/connect/facebook`} className="social-link"><img src={imgFacebook} alt=''/></a>
-                            <a href={`${process.env.API_URL}/connect/google`}><img src={imgGoogle} alt=''/></a>
+                            <a 
+                                href={`${process.env.API_URL}/connect/facebook`} 
+                                className="social-link">
+                                <img src={imgFacebook} alt=''/>
+                            </a>
+                            <a 
+                                href={`${process.env.API_URL}/connect/google`}>
+                                <img src={imgGoogle} alt=''/>
+                            </a>
                         </div>                        
                     </div>
                 </div>
@@ -57,3 +69,5 @@ export default function AccountInfo ({ setModalOpen }) {
         </div>
     </section>
 }
+
+export default AccountInfo;

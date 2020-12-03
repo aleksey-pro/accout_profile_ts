@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, Suspense } from 'react';
 import '../../styles/my_account.scss';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { getUser } from '../../api';
 import { initUser } from '../../reducer';
@@ -15,12 +16,16 @@ import AccountHeader from './AccountHeader';
 import AccountInfo from './AccountInfo';
 import MostViewed from '../MostViewed';
 import MobileApp from '../MobileApp';
-import Modal from '../../Modals';
-import ChangeAvatar from '../../Modals/ChangeAvatar';
+import Modal from  '../../Modals';
+import { withSuspense } from '../../utils/withSuspense';
 
-export default function Profile () {
+const ChangeAvatar = React.lazy(() => import('../../Modals/ChangeAvatar'));
+const SuspendedChangeAvatar= withSuspense(ChangeAvatar);
+
+
+const Profile: React.FC<RouteComponentProps> = () => {
     const { dispatch } = useContext(UserContext);
-    const [isModalOpen, setModalIsOpen] = useState(false);
+    const [isModalOpen, setModalIsOpen] = useState<boolean>(false);
     
     // useEffect(() => {
     //     getUser().then(data => dispatch(initUser(data)));
@@ -44,10 +49,12 @@ export default function Profile () {
             </Tab>
         </Tabs>
         <MostViewed />        
-        <MobileApp />       
-        <Modal isModalOpen={isModalOpen} setModalIsOpen={setModalIsOpen}>
-            <ChangeAvatar />
+        <MobileApp />
+        <Modal isModalOpen={isModalOpen}>
+            <SuspendedChangeAvatar isModalOpen={isModalOpen} setModalIsOpen={setModalIsOpen}/>
         </Modal>
     </div>
 }
+
+export default Profile;
 

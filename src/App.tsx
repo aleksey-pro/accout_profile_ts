@@ -4,7 +4,7 @@ import { Store } from './store';
 import Profile from './components/Profile/index';
 import ProfileSettings from './components/ProfileSettings/index';
 
-function App() {
+const App: React.FC = () => {
   return (
     <Switch>
       <Route exact path="/" render={props => <Store><Profile {...props} /></Store> } />

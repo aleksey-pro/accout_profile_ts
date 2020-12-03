@@ -1,17 +1,21 @@
-import React, { useState, useEffect, useContext } from 'react';
+import * as React from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { updateUser } from '../api';
 import { setUser } from '../reducer';
 import { UserContext } from '../store';
 
 import './../styles/components/modals.scss';
 import Upload from '../components/FormElements/Upload';
+
+import { ChangeAvatarType } from '../types';
+
 import imgUser from '../assets/img/user.png';
 import imgClose from '../assets/img/close.svg';
 import replayArrowRight from '../assets/img/replay-arrow-right.svg';
 import replayArrowLeft from '../assets/img/replay-arrow-left.svg';
 import loadFotoIcon from '../assets/img/load-photo.svg';
 
-const getFormData = (data) => {
+const getFormData = (data: any) => {
 	const formData = new FormData();
 	for (const key in data) {
 		const value = data[key];
@@ -22,13 +26,13 @@ const getFormData = (data) => {
 	return formData;
 };
 
-export default function ChangeAvatar ({ setModalIsOpen, modalIsOpen }) {
+const ChangeAvatar: React.FC<ChangeAvatarType>  = ({ setModalIsOpen, isModalOpen }) => {
     const { store: { user = {} }, dispatch } = useContext(UserContext);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [preview, setPreview] = useState(user.avatar);
-    const [file, setFile] = useState();
-    const responseHandler = (response) => {
+    const [preview, setPreview] = useState<string>(user.avatar);
+    const [file, setFile] = useState<{avatar: File | null}>();
+    const responseHandler = (response: any) => {
         if (response.error) {
             setError(response.error);
         } else {
@@ -37,16 +41,16 @@ export default function ChangeAvatar ({ setModalIsOpen, modalIsOpen }) {
         setLoading(false);
     }
 	useEffect(() => {
-		function onKeyDown(event) {
+		function onKeyDown(event: React.KeyboardEvent<Document>) {
 			if (event.keyCode === 27) {
 				setModalIsOpen(false);
 			}
 		}
-		document.addEventListener("keydown", onKeyDown);
+		document.addEventListener("keydown", (e) => onKeyDown(e as any));
 		return () => {
-			document.removeEventListener("keydown", onKeyDown);
+			document.removeEventListener("keydown", (e) => onKeyDown(e as any));
 		};
-    }, [modalIsOpen]);
+    }, [isModalOpen]);
 
     useEffect(() => {
         if(preview !== user.avatar) {
@@ -62,9 +66,6 @@ export default function ChangeAvatar ({ setModalIsOpen, modalIsOpen }) {
                 <div className="avatar-wrap upload-avatar">
                     <div className="container">
                         <div>
-                            {/* <div className="upload-msg">
-                            <img src={mobileAppIcon} alt="gaevy" className="avatar" />
-                        </div> */}
                             <div className="upload-avatar-wrap">
                                 <div id="upload-avatar">
                                     <img src={preview || imgUser} alt="" />
@@ -103,3 +104,5 @@ export default function ChangeAvatar ({ setModalIsOpen, modalIsOpen }) {
         </div>
     )
 }
+
+export default ChangeAvatar;

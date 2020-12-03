@@ -7,7 +7,9 @@ import AccountHeader from './AccountHeader';
 import Password from './Blocks/Password/index';
 import Notificitaions from './Blocks/Notificitaions/index';
 
-export default function ProfileSettings () {
+import { RouteComponentProps } from 'react-router-dom';
+
+export default function ProfileSettings (_props: RouteComponentProps) {
     return <div className="my-account">
         <AccountHeader />
         <Tabs activeTab={0} >

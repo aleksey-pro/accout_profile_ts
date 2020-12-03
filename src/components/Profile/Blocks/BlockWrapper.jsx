@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { UserContext } from '../../../store';
 import { getUserData } from '../../../api';
 import { setUserData } from '../../../reducer';
-import { getItemsFiltered } from '../../../utils';
 import Paginator from '../../Paginator';
 
 export default function BlockWrapper ({ children, type }) {

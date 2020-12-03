@@ -12,7 +12,7 @@ export default function Password (props) {
     return <div className={"input-label " + name}>
         {title && <label htmlFor={id}>{title}</label>}
         <input type={showPassword ? 'text' : 'password'} {...props} {...field}/>
-        {icon && <button className={`change-img ${error ? 'error' : ''}`} type="button">
+        {icon && <button className={`change-img ${error && touched ? 'error' : ''}`} type="button">
             <img src={icon} alt="" onClick={() => setShowPassword(!showPassword)}/>
         </button>}
         {error && touched && <div className="msg_err__container">
